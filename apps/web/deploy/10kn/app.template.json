@@ -51,6 +51,6 @@
     "DEFAULT_LOCALE": "en",
     "BETTER_AUTH_URL": "${APP_ORIGIN}",
     "AUTH_ALLOWLIST_DOMAINS": "",
-    "AUTH_ALLOWLIST_EMAILS": ""
+    "AUTH_ALLOWLIST_EMAILS": "mixmaxjam@gmail.com"
   }
 }
