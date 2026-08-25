@@ -10,6 +10,7 @@ import { Inline } from '~/components/layout/inline'
 import { cn } from '~/lib/utils'
 import { useT } from '~/hooks/use-t'
 import { withLang } from '~/lib/connect-link'
+import { HIDE_PRICING_NAV, PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 
 const guideShellGridClassName =
   'mx-auto grid max-w-guide-shell-max items-start gap-16 px-6 pt-16 pb-24 text-foreground max-lg:grid-cols-1 max-lg:gap-0 max-lg:pt-10'
@@ -56,16 +57,18 @@ export function GuideTopbar({
         >
           {t('publicHeader.shareWithAi')}
         </Link>
-        <Link
-          to={withLang('/pricing', locale)}
-          aria-current={publicPath === '/pricing' ? 'page' : undefined}
-          className={cn(
-            'whitespace-nowrap hover:opacity-70',
-            guideFocusRingRoundedClassName,
-          )}
-        >
-          {t('publicHeader.pricing')}
-        </Link>
+        {HIDE_PRICING_NAV ? null : (
+          <Link
+            to={withLang('/pricing', locale)}
+            aria-current={publicPath === '/pricing' ? 'page' : undefined}
+            className={cn(
+              'whitespace-nowrap hover:opacity-70',
+              guideFocusRingRoundedClassName,
+            )}
+          >
+            {t('publicHeader.pricing')}
+          </Link>
+        )}
       </nav>
     </header>
   )
@@ -73,7 +76,7 @@ export function GuideTopbar({
 
 export function GuideHomeLink({
   homeLabel,
-  label = 'Artifact Share',
+  label = PRODUCT_DISPLAY_NAME,
 }: {
   homeLabel: string
   label?: string

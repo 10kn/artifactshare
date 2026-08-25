@@ -20,24 +20,23 @@ vi.mock('~/hooks/use-t', () => ({
 
 describe('GuideTopbar and GuideHomeLink', () => {
   test.each([
-    ['en', '/share-with-ai', '/share-with-ai', 'Use with AI', 'Pricing'],
-    ['ja', '/ja/share-with-ai', '/ja/share-with-ai', 'AI から使う', '料金'],
-    ['en', '/pricing/', '/pricing', 'Use with AI', 'Pricing'],
-    ['ja', '/ja/pricing/', '/ja/pricing', 'AI から使う', '料金'],
+    ['en', '/share-with-ai', '/share-with-ai', 'Use with AI'],
+    ['ja', '/ja/share-with-ai', '/ja/share-with-ai', 'AI から使う'],
   ] as const)(
     'keeps the home link and locale nav contract for %s %s',
-    (locale, pathname, activeHref, shareWithAiLabel, pricingLabel) => {
+    (locale, pathname, activeHref, shareWithAiLabel) => {
       mockedLocale = locale
       const html = renderToStaticMarkup(
         <MemoryRouter initialEntries={[pathname]}>
           <GuideTopbar>
-            <GuideHomeLink homeLabel="Artifact Share home" />
+            <GuideHomeLink homeLabel="Icon Share home" />
           </GuideTopbar>
         </MemoryRouter>,
       )
 
       expect(html).toContain('href="/"')
-      expect(html).toContain('aria-label="Artifact Share home"')
+      expect(html).toContain('aria-label="Icon Share home"')
+      expect(html).toContain('>Icon Share<')
       expect(html).toContain('ml-auto')
       expect(html).toContain(
         `aria-label="${locale === 'ja' ? 'プロダクト' : 'Product'}"`,
@@ -45,11 +44,11 @@ describe('GuideTopbar and GuideHomeLink', () => {
       expect(html).toContain(
         `href="${locale === 'ja' ? '/ja/share-with-ai' : '/share-with-ai'}"`,
       )
-      expect(html).toContain(
-        `href="${locale === 'ja' ? '/ja/pricing' : '/pricing'}"`,
-      )
+      expect(html).not.toContain('href="/pricing"')
+      expect(html).not.toContain('href="/ja/pricing"')
       expect(html).toContain(`>${shareWithAiLabel}<`)
-      expect(html).toContain(`>${pricingLabel}<`)
+      expect(html).not.toContain('>Pricing<')
+      expect(html).not.toContain('>料金<')
 
       const activeLink = `href="${activeHref}"`
       const activeAnchor = (html.match(/<a[^>]*>/g) ?? []).find((anchor) =>
