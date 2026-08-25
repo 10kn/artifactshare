@@ -16,6 +16,7 @@ import test from 'node:test'
 import {
   APP_NAME,
   DEPLOY_DIR,
+  RESOURCE_PREFIX,
   TEMPLATE_DIR,
   atomicWriteJson,
   deriveHosts,
@@ -96,13 +97,13 @@ function writeBuildAndRedirect(repo, appConfigPath, overrides = {}) {
     d1_databases: [
       {
         binding: 'DB',
-        database_name: `${APP_NAME}-db`,
+        database_name: `${RESOURCE_PREFIX}-db`,
         database_id: DUMMY.d1Id,
       },
     ],
     kv_namespaces: [{ binding: 'VIEW_DEDUP', id: DUMMY.kvViewDedupId }],
     r2_buckets: [
-      { binding: 'BUCKET', bucket_name: `${APP_NAME}-artifacts` },
+      { binding: 'BUCKET', bucket_name: `${RESOURCE_PREFIX}-artifacts` },
     ],
     services: [
       { binding: 'OG_IMAGE_WORKER', service: `${APP_NAME}-og-image` },
@@ -400,11 +401,12 @@ test('missing required input is fail-closed (exit 2)', () => {
   }
 })
 
-test('actual worktree source still has upstream hosts (domain undecided → RED expected)', () => {
-  // Contract: do not patch production literals until domain is decided.
+test('actual worktree hosts.ts uses icon-share production literals', () => {
   const hosts = readFileSync(
     join(REAL_REPO, 'apps/web/app/lib/hosts.ts'),
     'utf8',
   )
-  assert.match(hosts, /artifactshare\.com/)
+  assert.match(hosts, /icon-share\.mixmaxjam\.workers\.dev/)
+  assert.match(hosts, /rokq\.io/)
+  assert.doesNotMatch(hosts, /10kn-share\.mixmaxjam\.workers\.dev/)
 })

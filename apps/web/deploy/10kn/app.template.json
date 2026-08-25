@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/wrangler/config-schema.json",
-  "name": "10kn-share",
+  "name": "${APP_NAME}",
   "compatibility_date": "2026-06-03",
   "compatibility_flags": ["nodejs_compat"],
   "main": "../workers/app.ts",
@@ -27,7 +27,7 @@
   },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ArtifactLiveRoom"] }],
   "services": [
-    { "binding": "OG_IMAGE_WORKER", "service": "10kn-share-og-image" }
+    { "binding": "OG_IMAGE_WORKER", "service": "${APP_NAME}-og-image" }
   ],
   "ratelimits": [
     {
@@ -49,6 +49,8 @@
   "vars": {
     "APP_ENV": "production",
     "DEFAULT_LOCALE": "en",
-    "BETTER_AUTH_URL": "${APP_ORIGIN}"
+    "BETTER_AUTH_URL": "${APP_ORIGIN}",
+    "AUTH_ALLOWLIST_DOMAINS": "",
+    "AUTH_ALLOWLIST_EMAILS": ""
   }
 }

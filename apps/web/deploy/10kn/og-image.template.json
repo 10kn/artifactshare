@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/wrangler/config-schema.json",
-  "name": "10kn-share-og-image",
+  "name": "${APP_NAME}-og-image",
   "compatibility_date": "2026-06-03",
   "compatibility_flags": ["nodejs_compat"],
   "main": "../workers/og-image.ts",

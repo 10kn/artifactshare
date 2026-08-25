@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/wrangler/config-schema.json",
-  "name": "10kn-share-sandbox",
+  "name": "${APP_NAME}-sandbox",
   "compatibility_date": "2026-06-03",
   "compatibility_flags": ["nodejs_compat"],
   "main": "../workers/sandbox.ts",

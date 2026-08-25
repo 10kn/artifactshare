@@ -10,9 +10,10 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
-  APP_NAME,
   DEPLOY_DIR,
+  RESOURCE_PREFIX,
   deriveHosts,
+  loadAppName,
   parseArgs,
 } from './render-10kn-deploy-config.mjs'
 
@@ -51,7 +52,8 @@ export function runPreflight(cfg) {
     return { ok: false, exitCode: 2, errors: ['missing_input'] }
   }
 
-  const { appHost, appOrigin } = deriveHosts(cfg.workersSubdomain)
+  const appName = loadAppName(cfg.repo)
+  const { appHost, appOrigin } = deriveHosts(cfg.workersSubdomain, appName)
   const web = (...p) => resolve(cfg.repo, 'apps/web', ...p)
   const deploy = (...p) => resolve(cfg.repo, DEPLOY_DIR, ...p)
 
@@ -98,13 +100,13 @@ export function runPreflight(cfg) {
   if (appCfg) {
     scanBanned('app', appRaw)
     scanBanned('app.json', JSON.stringify(appCfg))
-    if (appCfg.name !== APP_NAME) fail('app.name')
+    if (appCfg.name !== appName) fail('app.name')
     if (appCfg.workers_dev !== true) fail('app.workers_dev')
     if (appCfg.vars?.BETTER_AUTH_URL !== appOrigin) fail('app.BETTER_AUTH_URL')
     const d1 = appCfg.d1_databases?.find((d) => d.binding === 'DB')
     if (!d1) fail('app.d1.missing')
     else {
-      if (d1.database_name !== `${APP_NAME}-db`) fail('app.d1.database_name')
+      if (d1.database_name !== `${RESOURCE_PREFIX}-db`) fail('app.d1.database_name')
       rejectBadId('app.d1.database_id', d1.database_id)
       if (d1.database_id !== cfg.d1Id) fail('app.d1.database_id.mismatch')
     }
@@ -117,7 +119,7 @@ export function runPreflight(cfg) {
     if (
       JSON.stringify(appCfg.r2_buckets) !==
       JSON.stringify([
-        { binding: 'BUCKET', bucket_name: `${APP_NAME}-artifacts` },
+        { binding: 'BUCKET', bucket_name: `${RESOURCE_PREFIX}-artifacts` },
       ])
     ) {
       fail('app.r2')
@@ -125,7 +127,7 @@ export function runPreflight(cfg) {
     if (
       JSON.stringify(appCfg.services) !==
       JSON.stringify([
-        { binding: 'OG_IMAGE_WORKER', service: `${APP_NAME}-og-image` },
+        { binding: 'OG_IMAGE_WORKER', service: `${appName}-og-image` },
       ])
     ) {
       fail('app.services.OG_IMAGE_WORKER')
@@ -162,11 +164,11 @@ export function runPreflight(cfg) {
   if (sandboxCfg) {
     scanBanned('sandbox', sandboxRaw)
     scanBanned('sandbox.json', JSON.stringify(sandboxCfg))
-    if (sandboxCfg.name !== `${APP_NAME}-sandbox`) fail('sandbox.name')
+    if (sandboxCfg.name !== `${appName}-sandbox`) fail('sandbox.name')
     const d1 = sandboxCfg.d1_databases?.find((d) => d.binding === 'DB')
     if (!d1) fail('sandbox.d1.missing')
     else {
-      if (d1.database_name !== `${APP_NAME}-db`) fail('sandbox.d1.database_name')
+      if (d1.database_name !== `${RESOURCE_PREFIX}-db`) fail('sandbox.d1.database_name')
       rejectBadId('sandbox.d1.database_id', d1.database_id)
       if (d1.database_id !== cfg.d1Id) fail('sandbox.d1.database_id.mismatch')
       if (appCfg) {
@@ -182,7 +184,7 @@ export function runPreflight(cfg) {
     if (
       JSON.stringify(sandboxCfg.r2_buckets) !==
       JSON.stringify([
-        { binding: 'BUCKET', bucket_name: `${APP_NAME}-artifacts` },
+        { binding: 'BUCKET', bucket_name: `${RESOURCE_PREFIX}-artifacts` },
       ])
     ) {
       fail('sandbox.r2')
@@ -209,7 +211,7 @@ export function runPreflight(cfg) {
   if (ogCfg) {
     scanBanned('og', ogRaw)
     scanBanned('og.json', JSON.stringify(ogCfg))
-    if (ogCfg.name !== `${APP_NAME}-og-image`) fail('og.name')
+    if (ogCfg.name !== `${appName}-og-image`) fail('og.name')
     const kv = ogCfg.kv_namespaces?.find(
       (k) => k.binding === 'SLACK_PREVIEW_FONT_KV',
     )
@@ -242,20 +244,20 @@ export function runPreflight(cfg) {
         fail(`build.${key}`)
       }
     }
-    if (gen.name !== APP_NAME) fail('build.name')
-    if (gen.topLevelName != null && gen.topLevelName !== APP_NAME) {
+    if (gen.name !== appName) fail('build.name')
+    if (gen.topLevelName != null && gen.topLevelName !== appName) {
       fail('build.topLevelName')
     }
     if (gen.vars?.BETTER_AUTH_URL !== appOrigin) fail('build.BETTER_AUTH_URL')
     const d1 = gen.d1_databases?.find((d) => d.binding === 'DB')
     if (!d1 || d1.database_id !== cfg.d1Id) fail('build.d1.database_id')
-    if (d1 && d1.database_name !== `${APP_NAME}-db`) fail('build.d1.database_name')
+    if (d1 && d1.database_name !== `${RESOURCE_PREFIX}-db`) fail('build.d1.database_name')
     const kv = gen.kv_namespaces?.find((k) => k.binding === 'VIEW_DEDUP')
     if (!kv || kv.id !== cfg.kvViewDedupId) fail('build.kv.VIEW_DEDUP')
     if (
       JSON.stringify(gen.r2_buckets) !==
       JSON.stringify([
-        { binding: 'BUCKET', bucket_name: `${APP_NAME}-artifacts` },
+        { binding: 'BUCKET', bucket_name: `${RESOURCE_PREFIX}-artifacts` },
       ])
     ) {
       fail('build.r2')
@@ -263,7 +265,7 @@ export function runPreflight(cfg) {
     if (
       JSON.stringify(gen.services) !==
       JSON.stringify([
-        { binding: 'OG_IMAGE_WORKER', service: `${APP_NAME}-og-image` },
+        { binding: 'OG_IMAGE_WORKER', service: `${appName}-og-image` },
       ])
     ) {
       fail('build.services')

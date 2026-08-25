@@ -11,6 +11,7 @@
 // Output: apps/web/.10kn-deploy/{app,sandbox,og-image}.json (gitignored)
 
 import {
+  existsSync,
   mkdirSync,
   readFileSync,
   renameSync,
@@ -20,7 +21,19 @@ import {
 import { basename, dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-export const APP_NAME = '10kn-share'
+/** Cloudflare Worker script names (icon-share, icon-share-sandbox, …). */
+export const RESOURCE_PREFIX = '10kn-share'
+
+export function loadAppName(repo) {
+  const instancePath = resolve(repo, '../../instance.config.json')
+  if (existsSync(instancePath)) {
+    const { workerAppName } = JSON.parse(readFileSync(instancePath, 'utf8'))
+    if (workerAppName) return workerAppName
+  }
+  return 'icon-share'
+}
+
+export const APP_NAME = loadAppName(process.cwd())
 export const DEPLOY_DIR = 'apps/web/.10kn-deploy'
 export const TEMPLATE_DIR = 'apps/web/deploy/10kn'
 
@@ -58,8 +71,8 @@ export function parseArgs(argv = process.argv.slice(2), env = process.env) {
   }
 }
 
-export function deriveHosts(workersSubdomain) {
-  const appHost = `${APP_NAME}.${workersSubdomain}.workers.dev`
+export function deriveHosts(workersSubdomain, appName = APP_NAME) {
+  const appHost = `${appName}.${workersSubdomain}.workers.dev`
   return { appHost, appOrigin: `https://${appHost}` }
 }
 
@@ -121,8 +134,10 @@ export function atomicWriteJson(target, text) {
 
 export function renderDeployConfig(cfg) {
   assertInputs(cfg)
-  const { appHost, appOrigin } = deriveHosts(cfg.workersSubdomain)
+  const appName = loadAppName(cfg.repo)
+  const { appHost, appOrigin } = deriveHosts(cfg.workersSubdomain, appName)
   const tokens = {
+    APP_NAME: appName,
     WORKERS_SUBDOMAIN: cfg.workersSubdomain,
     SANDBOX_HOST: cfg.sandboxHost,
     D1_DATABASE_ID: cfg.d1Id,
