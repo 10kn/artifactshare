@@ -1,6 +1,6 @@
-export const APEX_HOST = 'artifactshare.com'
-export const WWW_HOST = 'www.artifactshare.com'
-export const SANDBOX_HOST = 'sandbox.artifactshare.com'
+export const APEX_HOST = 'icon-share.mixmaxjam.workers.dev'
+export const WWW_HOST = 'icon-share.mixmaxjam.workers.dev'
+export const SANDBOX_HOST = 'rokq.io'
 
 // Origins where MCP hosts render app widgets. An embed-token preview frames the
 // artifact's sandbox content from inside one of these, so the content's
