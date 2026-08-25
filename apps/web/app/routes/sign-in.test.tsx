@@ -104,7 +104,7 @@ describe('/sign-in', () => {
   test('shows providers first by default', () => {
     const html = renderToStaticMarkup(<SignIn />)
     expect(html).toContain('signin.title')
-    expect(html).toContain('signin.email.expand')
+    expect(html).not.toContain('signin.email.expand')
     expect(html).not.toContain('placeholder="signin.email.placeholder"')
     expect(html).toMatch(
       /<div class="mt-5"><div data-slot="sign-in-options"><\/div><\/div>/,
@@ -123,12 +123,12 @@ describe('/sign-in', () => {
     )
   })
 
-  test('opens email when it was explicitly selected', () => {
+  test('does not open email OTP when it was explicitly selected', () => {
     mocks.params = new URLSearchParams('method=email')
     const html = renderToStaticMarkup(<SignIn />)
-    expect(html).toContain('placeholder="signin.email.placeholder"')
-    expect(html).toContain('signin.email.collapse')
-    expect(mocks.signInOptionsProps).toHaveLength(0)
+    expect(html).not.toContain('placeholder="signin.email.placeholder"')
+    expect(html).not.toContain('signin.email.collapse')
+    expect(mocks.signInOptionsProps).toHaveLength(1)
   })
 
   test('keeps the existing OAuth error callback behavior', () => {
