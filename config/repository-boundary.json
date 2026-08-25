@@ -136,7 +136,15 @@
       "apps/web/wrangler.jsonc",
       "apps/web/wrangler.alerts.jsonc",
       "apps/web/wrangler.og-image.jsonc",
-      "apps/web/wrangler.sandbox.jsonc"
+      "apps/web/wrangler.sandbox.jsonc",
+      "apps/web/deploy/10kn/app.template.json",
+      "apps/web/deploy/10kn/og-image.template.json",
+      "apps/web/deploy/10kn/sandbox.template.json",
+      "docs/deploy-10kn.md",
+      "docs/deploy-icon-share.md",
+      "scripts/10kn-deploy-preflight.mjs",
+      "scripts/10kn-deploy-preflight.test.mjs",
+      "scripts/render-10kn-deploy-config.mjs"
     ],
     "public-only": [
       ".github/PULL_REQUEST_TEMPLATE.md",
