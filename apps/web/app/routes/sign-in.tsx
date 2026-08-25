@@ -29,6 +29,7 @@ import { PublicFooter } from '~/components/app/public-footer'
 import { ANALYTICS_EVENTS, ANALYTICS_PARAMS } from '~/lib/analytics/events'
 import { trackEvent } from '~/lib/analytics/track.client'
 import { captureAuthAttempt } from '~/lib/analytics/auth-attempt.client'
+import { EMAIL_OTP_SIGN_IN } from '~/lib/instance-policy'
 
 type Step = 'email' | 'code'
 
@@ -209,6 +210,27 @@ export default function SignIn() {
       disabled={maintenance}
     />
   )
+
+  if (!EMAIL_OTP_SIGN_IN) {
+    return (
+      <AuthCard
+        mark
+        title={title}
+        sub={sub}
+        footer={<PublicFooter variant="minimal" />}
+      >
+        {providerErrorMessage ? (
+          <AuthAlert>{providerErrorMessage}</AuthAlert>
+        ) : null}
+        <AuthProviders>{providers}</AuthProviders>
+        {maintenance && (
+          <AuthMaintenanceNotice>
+            {t('lp.maintenanceAuth')}
+          </AuthMaintenanceNotice>
+        )}
+      </AuthCard>
+    )
+  }
 
   return (
     <AuthCard
