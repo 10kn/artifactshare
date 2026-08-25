@@ -119,6 +119,11 @@ export async function loader({ request, url, context }: Route.LoaderArgs) {
     updatesNotice,
     maintenance: isMaintenanceRequest(request),
     lastLoginMethod: readLastLoginMethod(request.headers.get('cookie')),
+    // Same gate as socialProviders.microsoft in auth.server.ts. Hide the
+    // button when secrets are absent so the UI never offers a 401 path.
+    microsoftSignIn: Boolean(
+      env.MICROSOFT_CLIENT_ID && env.MICROSOFT_CLIENT_SECRET,
+    ),
     analyticsConsent,
     analyticsMeasurementId,
     analyticsUserId,
