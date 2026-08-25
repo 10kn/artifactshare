@@ -203,6 +203,16 @@ describe('root maintenance', () => {
   })
 })
 
+describe('root microsoft sign-in', () => {
+  test('hides Microsoft when client secrets are unset', async () => {
+    const context = { get: vi.fn(() => null) }
+    expect(
+      (await loader(loaderArgs('https://artifactshare.com/', 'en', context)))
+        .microsoftSignIn,
+    ).toBe(false)
+  })
+})
+
 describe('root screen states', () => {
   test('keeps the updates menu fixture independent of notice publication dates', async () => {
     const context = {

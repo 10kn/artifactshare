@@ -33,7 +33,9 @@ export function SignInOptions({
   const { t } = useT()
   const root = useRouteLoaderData<{
     analyticsConsent?: { shouldLoadAnalytics: boolean }
+    microsoftSignIn?: boolean
   }>('root')
+  const microsoftSignIn = root?.microsoftSignIn === true
 
   const resolveCallback = () =>
     callbackURL ??
@@ -77,17 +79,19 @@ export function SignInOptions({
         <span>{t('lp.cta')}</span>
         <LastUsedBadge method="google" />
       </Button>
-      <Button
-        type="button"
-        variant="outline"
-        className={authProviderButtonClassName}
-        onClick={() => startSignIn('microsoft')}
-        disabled={disabled}
-      >
-        <MicrosoftMark />
-        <span>{t('signin.ms.cta')}</span>
-        <LastUsedBadge method="microsoft" />
-      </Button>
+      {microsoftSignIn ? (
+        <Button
+          type="button"
+          variant="outline"
+          className={authProviderButtonClassName}
+          onClick={() => startSignIn('microsoft')}
+          disabled={disabled}
+        >
+          <MicrosoftMark />
+          <span>{t('signin.ms.cta')}</span>
+          <LastUsedBadge method="microsoft" />
+        </Button>
+      ) : null}
     </Stack>
   )
 }
