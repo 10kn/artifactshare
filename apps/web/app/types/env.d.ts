@@ -9,6 +9,10 @@ declare namespace Cloudflare {
     BETTER_AUTH_URL: string
     GOOGLE_CLIENT_ID: string
     GOOGLE_CLIENT_SECRET: string
+    // Comma-separated Google Workspace hd / email domains, and exact emails.
+    // Production (APP_ENV=production): empty or unset denies every new session.
+    AUTH_ALLOWLIST_DOMAINS?: string
+    AUTH_ALLOWLIST_EMAILS?: string
     MICROSOFT_CLIENT_ID: string
     MICROSOFT_CLIENT_SECRET: string
     BUCKET: R2Bucket
