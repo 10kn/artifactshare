@@ -38,6 +38,7 @@ import { LINK_SHARING_PLAN_DEFAULTS } from '~/lib/link-sharing-policy'
 import { associateD1Database } from '~/lib/d1-database-registry.server'
 import type { SessionUser } from '~/lib/user'
 import { isReservedBotEmailDomain } from '~/lib/bot-account'
+import { isSignInAllowed } from '~/lib/sign-in-allowlist'
 import {
   isPublicEmailDomain,
   normalizeEmailDomain,
@@ -187,25 +188,22 @@ function buildAuth() {
         // construction. An empty object is a no-op for mergeSchema.
         schema: {},
       }),
-      // Passwordless email sign-in for recipients whose tenant blocks both
-      // Google and Microsoft SSO. A one-time code (not a magic link) so the
-      // login survives corporate email link-scanners pre-fetching URLs and
-      // works when the code is read on a different device than the browser.
-      // First sign-in auto-creates the user (disableSignUp left false), which
-      // runs databaseHooks.user.create.before → a personal workspace; access
-      // is then granted by email-matched shares.
-      emailOTP({
-        otpLength: 6,
-        // Corporate mail can be delayed; give the round-trip 10 minutes.
-        expiresIn: 600,
-        allowedAttempts: 5,
-        sendVerificationOTP: async ({ email, otp }) => {
-          // Defense in depth: the reserved bot domain is unreachable and bot
-          // users never sign in, so refuse before sending anything.
-          await assertBotSignInAllowedForEmail(db, email)
-          await sendOtpEmail(email, otp)
-        },
-      }),
+      // Email OTP is a signup bypass on this instance. Keep it only for local
+      // `pnpm dev` / fixture flows; production is Google + allowlist.
+      ...(import.meta.env.DEV
+        ? [
+            emailOTP({
+              otpLength: 6,
+              expiresIn: 600,
+              allowedAttempts: 5,
+              sendVerificationOTP: async ({ email, otp }) => {
+                await assertBotSignInAllowedForEmail(db, email)
+                assertSignInAllowlist(email)
+                await sendOtpEmail(email, otp)
+              },
+            }),
+          ]
+        : []),
       // Record the method used on each sign-in in a 30-day cookie
       // (better-auth.last_used_login_method), so the sign-in screen can show a
       // "last used" hint. The default resolver maps OAuth callbacks to the
@@ -367,6 +365,10 @@ function buildAuth() {
               db,
               (session as { userId?: unknown }).userId,
             )
+            await assertSignInAllowlistForUserId(
+              db,
+              (session as { userId?: unknown }).userId,
+            )
             return isCliDeviceTokenDatabaseHookContext(context)
               ? {
                   data: {
@@ -392,6 +394,7 @@ function buildAuth() {
             if (u.kind === 'bot' || isReservedBotEmailDomain(u.email)) {
               throw botSignInRejectedError()
             }
+            assertSignInAllowlist(u.email)
             const authRoute = authRouteFromDatabaseHookContext(context)
             const creation = workspaceCreationPolicyForAuthRoute(authRoute)
             const emailVerified = u.emailVerified === true
@@ -1944,6 +1947,43 @@ export function botSignInRejectedError(): APIError {
     message: 'Bot accounts cannot sign in.',
     code: 'bot-sign-in-rejected',
   })
+}
+
+export function signInNotAllowedError(): APIError {
+  return new APIError('FORBIDDEN', {
+    message: 'This instance is invite-only.',
+    code: 'sign-in-not-allowed',
+  })
+}
+
+export function assertSignInAllowlist(
+  email: string,
+  hd?: string | null,
+): void {
+  if (
+    !isSignInAllowed({
+      email,
+      hd,
+      appEnv: env.APP_ENV,
+      domainsRaw: env.AUTH_ALLOWLIST_DOMAINS,
+      emailsRaw: env.AUTH_ALLOWLIST_EMAILS,
+    })
+  ) {
+    throw signInNotAllowedError()
+  }
+}
+
+async function assertSignInAllowlistForUserId(
+  db: Kysely<DB>,
+  userId: unknown,
+): Promise<void> {
+  if (typeof userId !== 'string' || !userId) return
+  const row = await db
+    .selectFrom('users')
+    .select('email')
+    .where('id', '=', userId)
+    .executeTakeFirst()
+  if (row?.email) assertSignInAllowlist(row.email)
 }
 
 /**
