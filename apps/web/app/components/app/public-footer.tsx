@@ -21,6 +21,7 @@ import { LOCALE_LABEL, SUPPORTED_LOCALES, type Locale } from '~/i18n/messages'
 import { DEFAULT_APP_THEME, isAppTheme, type AppTheme } from '~/lib/app-theme'
 import { withLang } from '~/lib/connect-link'
 import { isPublicPagePath } from '~/lib/guide-locale'
+import { HIDE_PRICING_NAV, PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 import { cn } from '~/lib/utils'
 
 export function PublicFooter({
@@ -46,13 +47,15 @@ export function PublicFooter({
     ['/terms', t('lp.terms')],
     ['/tokushoho', t('lp.tokushoho')],
   ] as const
-  const product = [
-    ['/about', t('footer.about')],
-    ['/connect', t('footer.connect')],
-    ['/share-with-ai', t('footer.shareWithAi')],
-    ['/pricing', t('lp.pricing')],
-    ['/updates', t('updates.pageTitle')],
-  ] as const
+  const product = (
+    [
+      ['/about', t('footer.about')],
+      ['/connect', t('footer.connect')],
+      ['/share-with-ai', t('footer.shareWithAi')],
+      ['/pricing', t('lp.pricing')],
+      ['/updates', t('updates.pageTitle')],
+    ] as const
+  ).filter(([path]) => !HIDE_PRICING_NAV || path !== '/pricing')
   const linkClass =
     'text-muted-foreground focus-visible:outline-ring focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:rounded-[var(--r-sm)] text-xs no-underline hover:text-foreground hover:underline'
   const columnHeadingClass =
@@ -100,7 +103,7 @@ export function PublicFooter({
                 'focus-visible:outline-ring focus-visible:rounded-[var(--r-sm)] focus-visible:outline-2 focus-visible:outline-offset-2',
               )}
             >
-              <BrandMark size={16} aria-hidden="true" /> Artifact Share
+              <BrandMark size={16} aria-hidden="true" /> {PRODUCT_DISPLAY_NAME}
             </Link>
             <p className="max-w-landing-sub-max text-muted-foreground m-0 text-xs">
               {t('lp.invite.about')}
@@ -162,7 +165,7 @@ export function PublicFooter({
           </>
         ) : null}
         <span suppressHydrationWarning>
-          © {new Date().getFullYear()} Artifact Share
+          © {new Date().getFullYear()} {PRODUCT_DISPLAY_NAME}
         </span>
         <nav
           className="flex items-center gap-2"

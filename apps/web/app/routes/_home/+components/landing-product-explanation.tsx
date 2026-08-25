@@ -21,6 +21,7 @@ import {
 } from '~/components/app/landing-styles'
 import { useT } from '~/hooks/use-t'
 import { withLang } from '~/lib/connect-link'
+import { HIDE_PRICING_NAV } from '~/lib/instance-policy'
 import { PRODUCT_OVERVIEW_STEPS } from '~/lib/product-overview-content'
 
 const WORKFLOW_CARDS = [
@@ -163,20 +164,22 @@ export function LandingProductExplanation({
               <p className={landingProductBodyClassName}>
                 {t('lp.access.startMethods')}
               </p>
-              <div className={landingProductCtaGroupClassName}>
-                <Link
-                  className={landingProductLinkClassName}
-                  to={withLang('/start', locale)}
-                >
-                  {t('lp.access.startCta')}
-                </Link>
-                <Link
-                  className={landingProductLinkClassName}
-                  to={withLang('/pricing', locale)}
-                >
-                  {t('lp.access.pricingCta')}
-                </Link>
-              </div>
+              {HIDE_PRICING_NAV ? null : (
+                <div className={landingProductCtaGroupClassName}>
+                  <Link
+                    className={landingProductLinkClassName}
+                    to={withLang('/start', locale)}
+                  >
+                    {t('lp.access.startCta')}
+                  </Link>
+                  <Link
+                    className={landingProductLinkClassName}
+                    to={withLang('/pricing', locale)}
+                  >
+                    {t('lp.access.pricingCta')}
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

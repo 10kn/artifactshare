@@ -69,11 +69,11 @@ vi.mock('~/hooks/use-t', () => ({
         'lp.ai.title': 'CLI for agents. MCP for chat.',
         'lp.ai.body': 'Use the CLI or MCP.',
         'lp.ai.cta': 'Connect your AI',
-        'lp.access.title': 'Start with Free—no credit card required.',
-        'lp.access.body': 'Choose a sharing scope and plan.',
+        'lp.access.title': 'Only allowed accounts can use this instance.',
+        'lp.access.body': 'This Icon Share instance is invite-only.',
         'lp.access.startCta': 'Start with Free',
         'lp.access.startMethods':
-          'Choose one of three ways to get started: browser, CLI, or MCP.',
+          'Use it from the browser, CLI, or MCP.',
         'lp.access.pricingCta': 'Compare plans',
         'footer.about': 'About Artifact Share',
         'footer.operatedBy': 'Operated by',
@@ -145,7 +145,10 @@ describe('Landing', () => {
     expect(html).toContain('aria-expanded="false"')
     expect(html).toContain('href="/share-with-ai"')
     expect(html).toContain('href="/connect"')
-    expect(html).toContain('href="/pricing"')
+    expect(html).toContain('Icon Share')
+    expect(html).not.toContain('>Artifact Share<')
+    expect(html).not.toContain('href="/pricing"')
+    expect(html).not.toContain('Sign in with email')
     expect(html).toContain(
       'Turn HTML and Markdown made with AI into links that open in a browser.',
     )
@@ -161,16 +164,12 @@ describe('Landing', () => {
     )
     expect(html).not.toContain('lp.definition')
     expect(html).not.toContain('CLI and MCP supported environments.')
-    expect(html).toMatch(
-      /<a\b(?=[^>]*\bhref="\/start")(?![^>]*\bdata-slot="button")[^>]*>[\s\S]*?Start with Free[\s\S]*?<\/a>/,
-    )
-    expect(html).not.toMatch(
-      /<a\b(?=[^>]*\bhref="\/start")(?=[^>]*\bdata-slot="button")/,
-    )
-    expect(html).toContain(
-      'Choose one of three ways to get started: browser, CLI, or MCP.',
-    )
-    expect(html).toContain('Compare plans')
+    expect(html).not.toContain('href="/start"')
+    expect(html).not.toContain('Start with Free')
+    expect(html).toContain('Only allowed accounts can use this instance.')
+    expect(html).toContain('This Icon Share instance is invite-only.')
+    expect(html).toContain('Use it from the browser, CLI, or MCP.')
+    expect(html).not.toContain('Compare plans')
     expect(html).toContain('research-review.webp')
     expect(html).toContain('flow-publish-share.webp')
     expect(html).toContain('flow-comment.webp')

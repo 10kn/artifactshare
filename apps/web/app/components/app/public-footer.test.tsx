@@ -54,14 +54,15 @@ describe('PublicFooter', () => {
     for (const href of [
       '/connect',
       '/share-with-ai',
-      '/pricing',
       '/updates',
       '/terms',
       '/tokushoho',
     ]) {
       expect(html).toContain(`href="${locale === 'ja' ? `/ja${href}` : href}"`)
     }
-    expect(html).toContain(`© ${new Date().getFullYear()} Artifact Share`)
+    expect(html).not.toContain('href="/pricing"')
+    expect(html).not.toContain('href="/ja/pricing"')
+    expect(html).toContain(`© ${new Date().getFullYear()} Icon Share`)
     expect(html).toContain(`href="${locale === 'ja' ? '/ja/about' : '/about'}"`)
     expect(html).toContain('About Artifact Share')
     expect(html).toContain('Operated by')
@@ -92,7 +93,7 @@ describe('PublicFooter', () => {
     expect(html).not.toContain('Operated by TechTalk, Inc.')
     for (const href of ['/privacy', '/terms', '/tokushoho'])
       expect(html).toContain(`href="${href}"`)
-    expect(html).toContain(`© ${new Date().getFullYear()} Artifact Share`)
+    expect(html).toContain(`© ${new Date().getFullYear()} Icon Share`)
     expect(html).not.toContain('aria-label="Language"')
     expect(html).not.toContain('href="/ja"')
   })

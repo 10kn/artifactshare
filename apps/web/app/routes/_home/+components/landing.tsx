@@ -33,6 +33,7 @@ import { Stack } from '~/components/layout/stack'
 import { SignInOptions } from '~/components/app/sign-in-options'
 import { Badge } from '~/components/ui/badge'
 import { useT } from '~/hooks/use-t'
+import { EMAIL_OTP_SIGN_IN, PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 import { CONNECT_AI_AGENTS_ANCHOR, withLang } from '~/lib/connect-link'
 import { MCP_CONNECTOR_URL } from '~/lib/mcp-metadata'
 import { safeInternalNext } from '~/lib/safe-next'
@@ -74,7 +75,9 @@ export function Landing({
   )
 
   const callbackURL = safeInternalNext(next)
-  const signInHref = `/sign-in?method=email${next ? `&next=${encodeURIComponent(next)}` : ''}`
+  const signInHref = EMAIL_OTP_SIGN_IN
+    ? `/sign-in?method=email${next ? `&next=${encodeURIComponent(next)}` : ''}`
+    : null
   const heroContentOffsetClassName = inviteMode
     ? undefined
     : landingHeroContentOffsetClassName
@@ -100,7 +103,7 @@ export function Landing({
             aria-hidden="true"
           />
         </div>
-        <h1 className={landingBrandClassName}>Artifact Share</h1>
+        <h1 className={landingBrandClassName}>{PRODUCT_DISPLAY_NAME}</h1>
         {inviteMode ? (
           <p className={landingTitleClassName}>{t('lp.invite.title')}</p>
         ) : (
@@ -122,10 +125,12 @@ export function Landing({
               disabled={maintenance}
               regressionPrimary={regression?.primary}
             />
-            <Link to={signInHref} className={authEmailLinkClassName}>
-              {t('signin.email.toggle')}
-              <LastUsedBadge method="email" />
-            </Link>
+            {signInHref ? (
+              <Link to={signInHref} className={authEmailLinkClassName}>
+                {t('signin.email.toggle')}
+                <LastUsedBadge method="email" />
+              </Link>
+            ) : null}
           </AuthBlock>
         </Stack>
         {maintenance && (
