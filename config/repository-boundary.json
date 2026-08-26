@@ -144,6 +144,7 @@
       "docs/deploy-icon-share.md",
       "scripts/10kn-deploy-preflight.mjs",
       "scripts/10kn-deploy-preflight.test.mjs",
+      "scripts/10kn-attach-sandbox-wildcard-domain.mjs",
       "scripts/render-10kn-deploy-config.mjs"
     ],
     "public-only": [

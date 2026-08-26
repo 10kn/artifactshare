@@ -37,6 +37,11 @@ cd ../..
 # 5) deploy 順: OG → sandbox → app
 pnpm exec wrangler deploy -c apps/web/.10kn-deploy/og-image.json --name icon-share-og-image
 pnpm exec wrangler deploy -c apps/web/.10kn-deploy/sandbox.json --name icon-share-sandbox
+# 5b) wildcard DNS（必須）: wrangler の `*.host/*` route は DNS を作らない。
+#     かつ sandbox redeploy は API で付けた `*.rokq.io` Workers domain を消す。
+#     毎回 attach し直す:
+SANDBOX_HOST=rokq.io SANDBOX_WORKER=icon-share-sandbox \
+  node scripts/10kn-attach-sandbox-wildcard-domain.mjs
 cd apps/web && pnpm exec wrangler deploy --name icon-share   # app は -c 禁止
 
 # 6) secrets（--name icon-share）
@@ -47,7 +52,14 @@ pnpm exec wrangler secret put GOOGLE_CLIENT_SECRET --name icon-share
 # 7) smoke
 curl -I https://icon-share.mixmaxjam.workers.dev/
 curl -I https://rokq.io/
+# wildcard DNS（auth NS で NOERROR になること。NXDOMAIN なら 5b 未実施）
+dig @chris.ns.cloudflare.com +short a.rokq.io A
+curl -sI --resolve a.rokq.io:443:$(dig @1.1.1.1 +short a.rokq.io A | head -1) https://a.rokq.io/ | head -5
 ```
+
+## sandbox wildcard DNS
+
+`wrangler` config の `{ "pattern": "*.rokq.io/*", "zone_name": "rokq.io" }` は **Workers route のみ**。DNS / Universal SSL 用の `*.rokq.io` は Workers custom domain API で付ける（`scripts/10kn-attach-sandbox-wildcard-domain.mjs`）。config に `*.rokq.io` + `custom_domain: true` は wrangler が拒否する。
 
 ## sandbox ルート競合時
 
