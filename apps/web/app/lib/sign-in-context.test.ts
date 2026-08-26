@@ -1,41 +1,20 @@
 import { describe, expect, test } from 'vitest'
-import {
-  buildSignInErrorCallback,
-  signInIntent,
-  signInMethod,
-} from './sign-in-context'
+import { oauthProviderErrorI18nKey } from './sign-in-context'
 
-describe('sign-in context', () => {
-  test('recognizes only the supported intent and explicit email method', () => {
-    expect(signInIntent(new URLSearchParams('intent=upload'))).toBe('upload')
-    expect(signInIntent(new URLSearchParams('intent=unknown'))).toBeNull()
-    expect(signInMethod(new URLSearchParams('method=email'), null)).toBe(
-      'email',
-    )
-    expect(signInMethod(new URLSearchParams('method=unknown'), null)).toBe(
-      'provider',
+describe('oauthProviderErrorI18nKey', () => {
+  test('maps allowlist deny to not_allowed', () => {
+    expect(oauthProviderErrorI18nKey('sign-in-not-allowed')).toBe(
+      'signin.error.not_allowed',
     )
   })
 
-  test('opens email for an account-not-linked provider error', () => {
-    expect(signInMethod(new URLSearchParams(), 'ACCOUNT_NOT_LINKED')).toBe(
-      'email',
+  test('maps unknown codes to generic', () => {
+    expect(oauthProviderErrorI18nKey('invalid_code')).toBe(
+      'signin.error.generic',
     )
   })
 
-  test('preserves upload intent and a safe internal destination', () => {
-    expect(
-      buildSignInErrorCallback(
-        new URLSearchParams('intent=upload&next=%2F%3Fupload%3D1'),
-      ),
-    ).toBe('/sign-in?intent=upload&next=%2F%3Fupload%3D1')
-  })
-
-  test('drops unknown intent and unsafe destinations', () => {
-    expect(
-      buildSignInErrorCallback(
-        new URLSearchParams('intent=other&next=https%3A%2F%2Fevil.example'),
-      ),
-    ).toBe('/sign-in')
+  test('returns null when there is no error', () => {
+    expect(oauthProviderErrorI18nKey(null)).toBeNull()
   })
 })

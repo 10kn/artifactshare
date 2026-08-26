@@ -1,4 +1,25 @@
+import type { TKey } from '~/i18n/messages'
 import { safeInternalNext } from './safe-next'
+
+export function oauthProviderErrorI18nKey(
+  providerError: string | null,
+): TKey | null {
+  if (!providerError) return null
+  const lower = providerError.toLowerCase()
+  if (
+    providerError.includes('AADSTS65001') ||
+    lower.includes('consent_required')
+  ) {
+    return 'signin.error.admin_consent'
+  }
+  if (lower.includes('account_not_linked')) {
+    return 'signin.error.account_not_linked'
+  }
+  if (lower.includes('sign-in-not-allowed')) {
+    return 'signin.error.not_allowed'
+  }
+  return 'signin.error.generic'
+}
 
 export function signInMethod(
   params: URLSearchParams,

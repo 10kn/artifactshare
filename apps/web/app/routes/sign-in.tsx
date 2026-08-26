@@ -22,6 +22,7 @@ import { oauthAuthorizePath } from '~/lib/mcp-metadata'
 import { safeInternalNext } from '~/lib/safe-next'
 import {
   buildSignInErrorCallback,
+  oauthProviderErrorI18nKey,
   signInIntent,
   signInMethod,
 } from '~/lib/sign-in-context'
@@ -118,24 +119,10 @@ export default function SignIn() {
   const [emailOpen, setEmailOpen] = useState(method === 'email')
   const emailInputRef = useRef<HTMLInputElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
-  // better-auth redirects the unlinkable-account case as ?error=account_not_linked
-  // (lowercase, from "account not linked".split(" ").join("_")), so match
-  // case-insensitively; the AADSTS token is always uppercase from Microsoft.
-  const providerErrorLower = providerError?.toLowerCase() ?? ''
-  const getProviderErrorMessage = () => {
-    if (!providerError) return null
-    if (
-      providerError.includes('AADSTS65001') ||
-      providerErrorLower.includes('consent_required')
-    ) {
-      return t('signin.error.admin_consent')
-    }
-    if (providerErrorLower.includes('account_not_linked')) {
-      return t('signin.error.account_not_linked')
-    }
-    return t('signin.error.generic')
-  }
-  const providerErrorMessage = getProviderErrorMessage()
+  // better-auth redirects OAuth failures as ?error=<code> (see oauth2/errors).
+  // Allowlist deny is APIError code sign-in-not-allowed.
+  const providerErrorKey = oauthProviderErrorI18nKey(providerError)
+  const providerErrorMessage = providerErrorKey ? t(providerErrorKey) : null
 
   const handleSendCode = async (e: FormEvent) => {
     e.preventDefault()

@@ -971,6 +971,7 @@
   "signin.error.admin_consent": "Your organization requires admin approval for this app. Please ask your IT administrator to approve Artifact Share.",
   "signin.error.account_not_linked": "This email is already registered. Enter your address below and sign in with an email code.",
   "signin.error.generic": "Sign-in failed. Please try again.",
+  "signin.error.not_allowed": "This Google account is not allowed to sign in here.",
   "signin.email.toggle": "Sign in with email",
   "signin.email.expand": "Use email",
   "signin.email.collapse": "Back to Google or Microsoft",
