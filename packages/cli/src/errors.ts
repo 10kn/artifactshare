@@ -72,8 +72,8 @@ export function mapApiError(
     return cliError({
       code: 'upload_not_allowed',
       message: 'Sharing is temporarily unavailable.',
-      why: 'Artifact Share has paused sharing for now.',
-      hint: 'Contact Artifact Share support if you need sharing enabled.',
+      why: 'Icon Share has paused sharing for now.',
+      hint: 'Contact Icon Share support if you need sharing enabled.',
       agentRecoverable: false,
       requiresHuman: true,
       recovery: { kind: 'ask_human' },
@@ -85,7 +85,7 @@ export function mapApiError(
       code: 'self_upload_disabled',
       message: 'This account cannot upload its own files.',
       why: 'Email-code sign-in creates a viewer workspace for shared files only.',
-      hint: 'Sign in with Google or Microsoft on the Artifact Share website, then retry share.',
+      hint: 'Sign in with Google or Microsoft on the Icon Share website, then retry share.',
       agentRecoverable: false,
       requiresHuman: true,
       recovery: { kind: 'ask_human' },
@@ -96,7 +96,7 @@ export function mapApiError(
     return cliError({
       code: 'workspace_access_revoked',
       message: apiMessage ?? 'Your access to this workspace has been revoked.',
-      why: 'Artifact Share revoked this account’s workspace membership.',
+      why: 'Icon Share revoked this account’s workspace membership.',
       hint: 'Ask a workspace administrator to restore membership, then retry share.',
       agentRecoverable: false,
       requiresHuman: true,
@@ -108,9 +108,9 @@ export function mapApiError(
       code: 'contributor_limit_exceeded',
       message:
         apiMessage ??
-        'This workspace cannot add more contributors. Contact the Artifact Share team.',
+        'This workspace cannot add more contributors. Contact the Icon Share team.',
       why: 'This workspace cannot add more contributors.',
-      hint: 'Contact the Artifact Share team, then retry.',
+      hint: 'Contact the Icon Share team, then retry.',
       agentRecoverable: false,
       requiresHuman: true,
       recovery: { kind: 'ask_human' },
@@ -495,7 +495,7 @@ export function mapApiError(
     return cliError({
       code: 'validation_failed',
       message: apiMessage ?? 'The request input is invalid.',
-      why: 'Artifact Share rejected the request as invalid.',
+      why: 'Icon Share rejected the request as invalid.',
       hint: 'Check the command input and retry.',
       agentRecoverable: true,
       requiresHuman: false,
@@ -506,7 +506,7 @@ export function mapApiError(
     return cliError({
       code: 'service_unavailable',
       message: apiMessage ?? 'Upload permission could not be checked.',
-      why: 'Artifact Share could not verify upload permission right now.',
+      why: 'Icon Share could not verify upload permission right now.',
       hint: 'Retry later with the same command.',
       agentRecoverable: true,
       requiresHuman: false,
@@ -516,8 +516,8 @@ export function mapApiError(
   if (apiCode === 'maintenance') {
     return cliError({
       code: 'maintenance',
-      message: apiMessage ?? 'Artifact Share is currently under maintenance.',
-      why: 'Artifact Share is temporarily unavailable while maintenance is in progress.',
+      message: apiMessage ?? 'Icon Share is currently under maintenance.',
+      why: 'Icon Share is temporarily unavailable while maintenance is in progress.',
       hint: 'Retry the same command in a few minutes.',
       agentRecoverable: true,
       requiresHuman: false,
@@ -527,7 +527,7 @@ export function mapApiError(
   }
   return cliError({
     code: 'service_error',
-    message: apiMessage ?? `Artifact Share returned HTTP ${status}.`,
+    message: apiMessage ?? `Icon Share returned HTTP ${status}.`,
     why: `The API request failed with status ${status}.`,
     hint: 'Check the input and retry. If this repeats, report the response code.',
     agentRecoverable: status >= 500,
@@ -541,7 +541,7 @@ export function serviceError(message: string): CliError {
   return cliError({
     code: 'service_error',
     message,
-    why: 'Artifact Share returned a success response without required fields.',
+    why: 'Icon Share returned a success response without required fields.',
     hint: 'Retry with --json. If this repeats, report the response.',
     agentRecoverable: true,
     requiresHuman: false,
@@ -683,7 +683,7 @@ export function tokenInvalidError(): CliError {
   return cliError({
     code: 'token_invalid',
     message: 'The bearer token is invalid or expired.',
-    why: 'Artifact Share rejected the Authorization bearer token.',
+    why: 'Icon Share rejected the Authorization bearer token.',
     hint: `Refresh ${TOKEN_ENV_VAR} or sign in again, then retry.`,
     agentRecoverable: false,
     requiresHuman: true,
@@ -783,7 +783,7 @@ export function tokenStoreUnavailableError(
   return cliError({
     code: 'token_store_unavailable',
     message: 'No safe token store is available.',
-    why: 'Artifact Share could not use an OS credential store for this environment.',
+    why: 'Icon Share could not use an OS credential store for this environment.',
     hint,
     agentRecoverable: retryable,
     requiresHuman: !retryable,
@@ -800,7 +800,7 @@ export function configHomeUnavailableError(profile?: string): CliError {
   return cliError({
     code: 'config_home_unavailable',
     message: 'The user configuration directory could not be resolved.',
-    why: 'Artifact Share could not resolve a home directory for profile configuration or the plaintext token fallback.',
+    why: 'Icon Share could not resolve a home directory for profile configuration or the plaintext token fallback.',
     hint: 'Set ARTIFACTSHARE_CONFIG_HOME to a private directory owned by the current user, then retry.',
     agentRecoverable: true,
     requiresHuman: false,
@@ -816,8 +816,8 @@ export function configHomeUnavailableError(profile?: string): CliError {
 export function skillUpdateConflictError(path: string): CliError {
   return cliError({
     code: 'skill_update_conflict',
-    message: `The file at ${path} is not managed by Artifact Share CLI.`,
-    why: 'Artifact Share only rewrites or removes skill files it created with a managed marker comment.',
+    message: `The file at ${path} is not managed by Icon Share CLI.`,
+    why: 'Icon Share only rewrites or removes skill files it created with a managed marker comment.',
     hint: 'Inspect the file and resolve it yourself, or rerun skills install --tool <tool> --force to overwrite it.',
     agentRecoverable: false,
     requiresHuman: true,
@@ -830,7 +830,7 @@ export function unknownCommandError(command: string): CliError {
   return cliError({
     code: 'unknown_command',
     message: `Unknown command: ${command}`,
-    why: 'The command is not part of Artifact Share CLI.',
+    why: 'The command is not part of Icon Share CLI.',
     hint: `Run ${CLI_INVOCATION} --help.`,
     agentRecoverable: true,
     requiresHuman: false,
@@ -847,10 +847,10 @@ export function normalizeApiCode(value: unknown): string | null {
 
 export function uploadBlockedHint(code: string | null): string {
   if (code === 'self-upload-disabled') {
-    return 'Sign in with Google or Microsoft on the Artifact Share website, then retry share.'
+    return 'Sign in with Google or Microsoft on the Icon Share website, then retry share.'
   }
   if (code === 'upload-not-allowed') {
-    return 'Contact Artifact Share support; sharing is temporarily unavailable.'
+    return 'Contact Icon Share support; sharing is temporarily unavailable.'
   }
   if (code === 'upload-policy-unavailable') {
     return 'Retry doctor later; upload permission could not be checked.'
@@ -908,7 +908,7 @@ export function networkError(error: unknown): CliError {
     why:
       error instanceof Error
         ? error.message
-        : 'Artifact Share could not be reached.',
+        : 'Icon Share could not be reached.',
     hint: 'Check the base URL and network connection, then retry.',
     agentRecoverable: true,
     requiresHuman: false,
@@ -926,7 +926,7 @@ export function appendOutcomeUnknownError(
     why:
       error instanceof Error
         ? `The connection ended before confirmation: ${error.message}`
-        : 'The connection ended before Artifact Share confirmed whether the append was saved.',
+        : 'The connection ended before Icon Share confirmed whether the append was saved.',
     hint: `Run ${CLI_INVOCATION} artifacts get ${artifactId} --json before retrying append. Inspect the source end for Markdown; for HTML, inspect immediately before the selected closing body tag, or the source end when that tag is absent.`,
     agentRecoverable: true,
     requiresHuman: false,

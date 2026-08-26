@@ -409,7 +409,7 @@ export async function verifyAndStoreProfileToken(
       : null
   const deviceId = storedDeviceId ?? randomUUID()
   const deviceSuffix = `, ${deviceId.slice(0, 8)})`
-  const devicePrefix = `Artifact Share CLI on ${platform()} ${arch()} (`
+  const devicePrefix = `Icon Share CLI on ${platform()} ${arch()} (`
   const profileBudget = Math.max(
     0,
     100 - devicePrefix.length - deviceSuffix.length,
@@ -629,7 +629,7 @@ async function resolveAuthorizationPreset(
 }
 
 export function deviceNameForProfile(profile: string): string {
-  const prefix = `Artifact Share CLI on ${platform()} ${arch()} (`
+  const prefix = `Icon Share CLI on ${platform()} ${arch()} (`
   return `${prefix}${profile.slice(0, Math.max(0, 99 - prefix.length))})`
 }
 

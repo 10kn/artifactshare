@@ -246,7 +246,7 @@ function changelogHumanOutput(data: unknown): string {
   const version = typeof data.version === 'string' ? data.version : ''
   const updatesUrl =
     typeof data.updates_url === 'string' ? data.updates_url : ''
-  const lines = [`Artifact Share CLI ${version}`, '', `Updates: ${updatesUrl}`]
+  const lines = [`Icon Share CLI ${version}`, '', `Updates: ${updatesUrl}`]
   const latest = data.latest
   if (isRecord(latest) && typeof latest.body === 'string' && latest.body) {
     const latestVersion =
