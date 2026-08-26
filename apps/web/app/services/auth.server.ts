@@ -34,6 +34,7 @@ import { mcpResourceUrl } from '~/lib/mcp-metadata'
 import { nowIso } from '~/lib/datetime'
 import { normalizeLocaleTag } from '~/lib/i18n.server'
 import { PLAN_STORAGE_QUOTA_BYTES } from '~/lib/billing-plan.server'
+import { BILLING_ENABLED, SELF_HOST_PLAN } from '~/lib/instance-policy'
 import { LINK_SHARING_PLAN_DEFAULTS } from '~/lib/link-sharing-policy'
 import { associateD1Database } from '~/lib/d1-database-registry.server'
 import type { SessionUser } from '~/lib/user'
@@ -1248,7 +1249,9 @@ export type WorkspaceCreationPolicy = {
 
 const DEFAULT_WORKSPACE_CREATION_POLICY: WorkspaceCreationPolicy = {
   selfUploadEnabled: true,
-  storageQuotaBytes: PLAN_STORAGE_QUOTA_BYTES.free,
+  storageQuotaBytes: BILLING_ENABLED
+    ? PLAN_STORAGE_QUOTA_BYTES.free
+    : PLAN_STORAGE_QUOTA_BYTES[SELF_HOST_PLAN],
 }
 
 export function workspaceCreationPolicyForAuthRoute(
@@ -1263,7 +1266,24 @@ export function workspaceCreationPolicyForAuthRoute(
 function workspaceCreationValues(policy: WorkspaceCreationPolicy): {
   self_upload_enabled: number
   storage_quota_bytes: number
+  plan?: typeof SELF_HOST_PLAN
+  link_sharing_enabled?: number
+  external_posting_enabled?: number
+  link_expiry_default_days?: number | null
+  link_expiry_max_days?: number | null
 } {
+  if (!BILLING_ENABLED && policy.selfUploadEnabled) {
+    const defaults = LINK_SHARING_PLAN_DEFAULTS[SELF_HOST_PLAN]
+    return {
+      self_upload_enabled: 1,
+      storage_quota_bytes: PLAN_STORAGE_QUOTA_BYTES[SELF_HOST_PLAN],
+      plan: SELF_HOST_PLAN,
+      link_sharing_enabled: defaults.linkSharingEnabled ? 1 : 0,
+      external_posting_enabled: defaults.externalPostingEnabled ? 1 : 0,
+      link_expiry_default_days: defaults.linkExpiryDefaultDays,
+      link_expiry_max_days: defaults.linkExpiryMaxDays,
+    }
+  }
   return {
     self_upload_enabled: policy.selfUploadEnabled ? 1 : 0,
     storage_quota_bytes: policy.storageQuotaBytes,

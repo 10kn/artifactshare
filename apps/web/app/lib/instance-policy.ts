@@ -9,3 +9,11 @@ export const HIDE_PRICING_NAV: boolean = true
 /** Hide SaaS legal / analytics / operator chrome for a private invite-only instance. */
 export const HIDE_PUBLIC_LEGAL_NAV: boolean = true
 export const EMAIL_OTP_SIGN_IN: boolean = false
+/**
+ * Stripe / checkout off for this private self-host. Keep false; do not enable
+ * STRIPE_* secrets. When false, new upload-enabled workspaces are provisioned
+ * at SELF_HOST_PLAN (Plus entitlements, including link sharing).
+ */
+export const BILLING_ENABLED: boolean = false
+/** Plan written on workspace create when BILLING_ENABLED is false. */
+export const SELF_HOST_PLAN = 'plus' as const
