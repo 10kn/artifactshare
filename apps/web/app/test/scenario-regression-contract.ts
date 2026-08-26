@@ -68,7 +68,7 @@ export const SCENARIO_CONTRACTS = Object.fromEntries(
           ? {
               interactions: [
                 {
-                  selector: '[aria-label="Collapse Artifact Share"]',
+                  selector: '[aria-label="Collapse Icon Share"]',
                   type: 'hover' as const,
                   waitMs: 350,
                 },

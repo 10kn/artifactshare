@@ -21,12 +21,12 @@ vi.mock('~/hooks/use-t', () => ({
             : 'Share straight from your AI →',
         'empty.productGuide':
           mockedLocale === 'ja'
-            ? 'Artifact Shareでできることを知り、ブラウザ、CLI、MCPの3つから始め方を選べます。'
-            : 'Learn what Artifact Share does and choose how to get started in your browser, with the CLI, or via MCP.',
+            ? 'Icon Shareでできることを知り、ブラウザ、CLI、MCPの3つから始め方を選べます。'
+            : 'Learn what Icon Share does and choose how to get started in your browser, with the CLI, or via MCP.',
         'empty.about':
           mockedLocale === 'ja'
-            ? 'Artifact Shareについて'
-            : 'About Artifact Share',
+            ? 'Icon Shareについて'
+            : 'About Icon Share',
         'empty.start': mockedLocale === 'ja' ? '始め方' : 'Get started',
         'upload.cta.primary': mockedLocale === 'ja' ? 'アップロード' : 'Upload',
         'recent.empty.title':
@@ -60,8 +60,8 @@ describe('EmptyState', () => {
       expect(html).toContain(`href="${start}"`)
       expect(html).toContain(
         locale === 'ja'
-          ? 'Artifact Shareでできることを知り、ブラウザ、CLI、MCPの3つから始め方を選べます。'
-          : 'Learn what Artifact Share does and choose how to get started in your browser, with the CLI, or via MCP.',
+          ? 'Icon Shareでできることを知り、ブラウザ、CLI、MCPの3つから始め方を選べます。'
+          : 'Learn what Icon Share does and choose how to get started in your browser, with the CLI, or via MCP.',
       )
       expect(html).toContain('flex-wrap')
     },

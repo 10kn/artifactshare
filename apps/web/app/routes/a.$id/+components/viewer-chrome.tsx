@@ -419,7 +419,7 @@ export function ViewerChrome({
               aria-hidden="true"
             >
               <BrandMark size={16} aria-hidden="true" />
-              <span>Artifact Share</span>
+              <span>Icon Share</span>
             </span>
             <IconChevronUp aria-hidden="true" strokeWidth={2.5} />
           </Button>

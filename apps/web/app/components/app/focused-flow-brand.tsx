@@ -3,6 +3,7 @@ import { BrandMark } from '~/components/app/brand-mark'
 import { guideFocusRingRoundedClassName } from '~/components/app/guide-styles'
 import { useT } from '~/hooks/use-t'
 import { cn } from '~/lib/utils'
+import { PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 
 export function FocusedFlowBrand() {
   const { t } = useT()
@@ -16,7 +17,7 @@ export function FocusedFlowBrand() {
       )}
     >
       <BrandMark size={16} aria-hidden="true" />
-      <span>Artifact Share</span>
+      <span>{PRODUCT_DISPLAY_NAME}</span>
     </Link>
   )
 }

@@ -22,7 +22,7 @@ Choose **Restore** when the person should rejoin the workspace. Restoration retu
 
 You can change the workspace name at the top of **Settings**. Enter the new name and save it.
 
-Under **Settings** and **Integrations**, you can connect Artifact Share to Slack, add another Slack workspace, or disconnect an existing connection.
+Under **Settings** and **Integrations**, you can connect Icon Share to Slack, add another Slack workspace, or disconnect an existing connection.
 
 For Team projects, admins can manage projects and view private projects even when they are not project members. On a file, admins can organize comments by resolving or reopening threads and removing comments or threads when necessary.
 

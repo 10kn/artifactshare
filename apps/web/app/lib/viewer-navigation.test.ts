@@ -33,7 +33,7 @@ describe('linkNavigationModeFor', () => {
 })
 
 describe('classifyViewerLinkNavigation', () => {
-  test('opens Artifact Share links outside the iframe', () => {
+  test('opens Icon Share links outside the iframe', () => {
     expect(
       classifyViewerLinkNavigation({
         ...base,
@@ -46,7 +46,7 @@ describe('classifyViewerLinkNavigation', () => {
     })
   })
 
-  test('opens Artifact Share links for known app hosts in a new tab', () => {
+  test('opens Icon Share links for known app hosts in a new tab', () => {
     expect(
       classifyViewerLinkNavigation({
         ...base,

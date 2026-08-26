@@ -11,13 +11,13 @@ const OG_IMAGE_URL = `https://${APEX_HOST}/og-image`
 
 const PRIVACY_META: Record<Locale, { title: string; description: string }> = {
   en: {
-    title: 'Privacy Policy · Artifact Share',
-    description: 'How Artifact Share collects, uses, and protects your data.',
+    title: 'Privacy Policy · Icon Share',
+    description: 'How Icon Share collects, uses, and protects your data.',
   },
   ja: {
-    title: 'プライバシーポリシー · Artifact Share',
+    title: 'プライバシーポリシー · Icon Share',
     description:
-      'Artifact Share が個人情報をどのように収集、利用、保護するか。',
+      'Icon Share が個人情報をどのように収集、利用、保護するか。',
   },
 }
 

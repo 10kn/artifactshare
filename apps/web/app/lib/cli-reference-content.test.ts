@@ -131,7 +131,7 @@ describe('CLI reference content', () => {
     expect(
       Object.values(cliReferenceContent('ja').links).map((link) => link.label),
     ).toEqual([
-      'AI から Artifact Share を使う',
+      'AI から Icon Share を使う',
       '接続ガイド',
       '更新情報',
       'モバイル文書の安全な引き継ぎ',

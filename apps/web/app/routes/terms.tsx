@@ -11,14 +11,14 @@ const OG_IMAGE_URL = `https://${APEX_HOST}/og-image`
 
 const TERMS_META: Record<Locale, { title: string; description: string }> = {
   en: {
-    title: 'Terms of Service · Artifact Share',
+    title: 'Terms of Service · Icon Share',
     description:
-      'Terms of Service for Artifact Share — acceptable use, your content, takedown procedures, and limitations of liability.',
+      'Terms of Service for Icon Share — acceptable use, your content, takedown procedures, and limitations of liability.',
   },
   ja: {
-    title: '利用規約 · Artifact Share',
+    title: '利用規約 · Icon Share',
     description:
-      'Artifact Share の利用規約 — 許容される利用、コンテンツの扱い、削除手続き、責任の制限。',
+      'Icon Share の利用規約 — 許容される利用、コンテンツの扱い、削除手続き、責任の制限。',
   },
 }
 

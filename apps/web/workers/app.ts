@@ -69,14 +69,14 @@ const MAINTENANCE_HTML = `<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Artifact Share - メンテナンス中</title>
+<title>Icon Share - メンテナンス中</title>
 <style>
 body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 2rem auto; max-width: 36rem; padding: 0 1rem; color: #1a1a1a; }
 h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
 </style>
 </head>
 <body>
-<h1>Artifact Share は現在メンテナンス中です</h1>
+<h1>Icon Share は現在メンテナンス中です</h1>
 <p>通常、短時間で復旧します。しばらく時間を置いてからページを再読み込みしてください。</p>
 </body>
 </html>`
@@ -460,7 +460,7 @@ function maintenanceCliApiResponse(): Response {
     {
       error: {
         code: 'maintenance',
-        message: 'Artifact Share is currently under maintenance.',
+        message: 'Icon Share is currently under maintenance.',
       },
     },
     { status: 503, headers: maintenanceHeaders('application/json') },
@@ -474,7 +474,7 @@ function maintenanceMcpResponse(): Response {
       id: null,
       error: {
         code: -32000,
-        message: 'Artifact Share is currently under maintenance.',
+        message: 'Icon Share is currently under maintenance.',
         data: {
           code: 'maintenance',
           retry_after_seconds: MAINTENANCE_RETRY_AFTER_SECONDS,

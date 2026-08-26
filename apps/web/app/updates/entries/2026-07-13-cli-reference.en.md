@@ -1,5 +1,5 @@
 ---
-title: A public reference for the Artifact Share CLI
+title: A public reference for the Icon Share CLI
 date: 2026-07-13
 products: [cli, web]
 kind: new

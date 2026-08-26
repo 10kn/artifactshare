@@ -11,12 +11,12 @@ const OG_IMAGE_URL = `https://${APEX_HOST}/og-image`
 
 const TOKUSHOHO_META: Record<Locale, { title: string; description: string }> = {
   en: {
-    title: 'Commercial Disclosure · Artifact Share',
+    title: 'Commercial Disclosure · Icon Share',
     description:
       'Legally required disclosure under the Japanese Specified Commercial Transactions Act.',
   },
   ja: {
-    title: '特定商取引法に基づく表記 · Artifact Share',
+    title: '特定商取引法に基づく表記 · Icon Share',
     description: '特定商取引法に基づく販売事業者情報の開示。',
   },
 }

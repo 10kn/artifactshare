@@ -3,6 +3,7 @@ import type { ComponentProps, ReactNode } from 'react'
 
 import { BrandMark } from '~/components/app/brand-mark'
 import { cn } from '~/lib/utils'
+import { PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 
 export function AppTopbar({
   className,
@@ -41,7 +42,7 @@ export function TopbarBrand({
     >
       <BrandMark size={16} aria-hidden="true" />
       <span className="text-foreground max-nav:hidden shrink-0 font-semibold whitespace-nowrap">
-        Artifact Share
+        {PRODUCT_DISPLAY_NAME}
       </span>
       <span className="max-nav:hidden text-faint" aria-hidden="true">
         ·

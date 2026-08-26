@@ -807,9 +807,9 @@ function buildRichUnfurlPayload(
         {
           type: 'image',
           image_url: new URL('/apple-touch-icon.png', requestUrl).toString(),
-          alt_text: 'Artifact Share',
+          alt_text: 'Icon Share',
         },
-        { type: 'mrkdwn', text: 'Artifact Share' },
+        { type: 'mrkdwn', text: 'Icon Share' },
       ],
     },
     titleSection,

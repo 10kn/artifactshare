@@ -11,16 +11,16 @@ vi.mock('~/hooks/use-t', () => ({
     t: (key: string) =>
       key === 'vw.homeLink'
         ? mockedLocale === 'ja'
-          ? 'Artifact Share のホーム'
-          : 'Artifact Share home'
+          ? 'Icon Share のホーム'
+          : 'Icon Share home'
         : key,
   }),
 }))
 
 describe('FocusedFlowBrand', () => {
   test.each([
-    ['en', 'Artifact Share home'],
-    ['ja', 'Artifact Share のホーム'],
+    ['en', 'Icon Share home'],
+    ['ja', 'Icon Share のホーム'],
   ] as const)(
     'renders the shared brand contract for %s',
     (locale, homeLabel) => {
@@ -34,7 +34,7 @@ describe('FocusedFlowBrand', () => {
       expect(html).toContain('href="/"')
       expect(html).toContain(`aria-label="${homeLabel}"`)
       expect(html).toContain('bg-[url(/favicon.svg)]')
-      expect(html).toContain('>Artifact Share<')
+      expect(html).toContain('>Icon Share<')
       expect(html).toContain('mb-4')
     },
   )

@@ -5,7 +5,7 @@ products: [web, cli]
 kind: improve
 ---
 
-Artifact Share CLI 0.11.0 で、AIエージェント向けのログイン設定を追加しました。`npx --yes @artifactshare/cli login --preset agent` を実行し、ブラウザでプロジェクトを1つ選ぶと、そのプロジェクトだけを扱えるCLIセッションを作成できます。
+Icon Share CLI 0.11.0 で、AIエージェント向けのログイン設定を追加しました。`npx --yes @artifactshare/cli login --preset agent` を実行し、ブラウザでプロジェクトを1つ選ぶと、そのプロジェクトだけを扱えるCLIセッションを作成できます。
 
 <!-- more -->
 

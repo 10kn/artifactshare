@@ -4,6 +4,7 @@ import { useT } from '~/hooks/use-t'
 import { BrandMark } from '~/components/app/brand-mark'
 import { guideFocusRingClassName } from '~/components/app/guide-styles'
 import { cn } from '~/lib/utils'
+import { PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 import { withLang } from '~/lib/connect-link'
 import {
   HoverCard,
@@ -69,7 +70,7 @@ export function ViewerNav({
           <div className="flex items-start gap-3">
             <BrandMark size={24} aria-hidden="true" />
             <div className="min-w-0">
-              <p className="font-semibold">Artifact Share</p>
+              <p className="font-semibold">{PRODUCT_DISPLAY_NAME}</p>
               <p className="text-muted-foreground mt-1 text-sm">
                 {t('vw.productSummary')}
               </p>
@@ -91,7 +92,7 @@ export function ViewerNav({
             className={markClassName}
             aria-hidden="true"
           />
-          <span className={homeNameClassName}>Artifact Share</span>
+          <span className={homeNameClassName}>{PRODUCT_DISPLAY_NAME}</span>
         </Link>
         {infoLink}
       </div>
@@ -113,7 +114,7 @@ export function ViewerNav({
           aria-hidden="true"
         />
         {hasReturnContext ? null : (
-          <span className={homeNameClassName}>Artifact Share</span>
+          <span className={homeNameClassName}>{PRODUCT_DISPLAY_NAME}</span>
         )}
       </Link>
       {hasReturnContext ? (

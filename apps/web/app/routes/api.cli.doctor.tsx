@@ -62,7 +62,7 @@ function uploadPermissionDiagnostic(kind: string) {
     ? {
         code: 'upload-not-allowed',
         message:
-          'Uploads are temporarily unavailable. Contact Artifact Share support if you need help.',
+          'Uploads are temporarily unavailable. Contact Icon Share support if you need help.',
       }
     : {
         code: 'upload-policy-unavailable',

@@ -1,5 +1,5 @@
 ---
-title: Artifact Share CLI の公開リファレンス
+title: Icon Share CLI の公開リファレンス
 date: 2026-07-13
 products: [cli, web]
 kind: new

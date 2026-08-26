@@ -1597,33 +1597,33 @@ const DEV_SIGN_IN_CONFIG = {
     email: 'dev-free-owner@artifactshare.local',
     name: 'Free owner',
     plan: 'free',
-    workspace: 'Artifact Share Local Dev Free',
+    workspace: 'Icon Share Local Dev Free',
     role: 'owner',
   },
   'plus-owner': {
     email: 'dev-plus-owner@artifactshare.local',
     name: 'Plus owner',
     plan: 'plus',
-    workspace: 'Artifact Share Local Dev Plus',
+    workspace: 'Icon Share Local Dev Plus',
     role: 'owner',
   },
   'team-owner': {
     email: 'dev-team-owner@artifactshare.local',
     name: 'Team owner',
     plan: 'team',
-    workspace: 'Artifact Share Local Dev Team',
+    workspace: 'Icon Share Local Dev Team',
     role: 'owner',
   },
   'team-member': {
     email: 'dev-team-member@artifactshare.local',
     name: 'Team member',
     plan: 'team',
-    workspace: 'Artifact Share Local Dev Team',
+    workspace: 'Icon Share Local Dev Team',
     role: 'member',
   },
 } as const
 
-export const DEV_SIGN_IN_WORKSPACE_NAME = 'Artifact Share Local Dev Team'
+export const DEV_SIGN_IN_WORKSPACE_NAME = 'Icon Share Local Dev Team'
 export const DEV_SIGN_IN_ADMIN_EMAIL = DEV_SIGN_IN_CONFIG['team-owner'].email
 export const DEV_SIGN_IN_MEMBER_EMAIL = DEV_SIGN_IN_CONFIG['team-member'].email
 
@@ -1916,15 +1916,15 @@ async function sendOtpEmail(to: string, otp: string): Promise<void> {
   // Only the dev case (no EMAIL binding) returns silently.
   const email: SendEmail | undefined = env.EMAIL
   if (!email) return
-  const subject = `ログインコード: ${otp} / Artifact Share sign-in code`
+  const subject = `ログインコード: ${otp} / Icon Share sign-in code`
   const text = [
-    `Artifact Share のログインコード: ${otp}`,
+    `Icon Share のログインコード: ${otp}`,
     'サインイン画面にこのコードを入力してください。10 分で期限切れになります。',
     '心当たりがない場合は、このメールを無視してください。',
     '',
     '---',
     '',
-    `Your Artifact Share sign-in code: ${otp}`,
+    `Your Icon Share sign-in code: ${otp}`,
     'Enter this code on the sign-in screen. It expires in 10 minutes.',
     "If you didn't request this, you can ignore this email.",
   ].join('\n')

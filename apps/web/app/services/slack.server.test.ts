@@ -69,7 +69,7 @@ describe('processSlackLinkShared', () => {
 
     expect(blocks[0]).toMatchObject({ type: 'context' })
     expect(serialized).toContain('apple-touch-icon.png')
-    expect(serialized).toContain('Artifact Share')
+    expect(serialized).toContain('Icon Share')
     expect(serialized).toContain(
       '*<https://artifactshare.com/a/md123abc|README>*',
     )

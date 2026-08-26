@@ -24,8 +24,8 @@ vi.mock('~/components/ui/hover-card', () => ({
 
 describe('ViewerNav', () => {
   test.each([
-    ['en', 'Artifact Share home', '/about'],
-    ['ja', 'Artifact Share のホーム', '/ja/about'],
+    ['en', 'Icon Share home', '/about'],
+    ['ja', 'Icon Share のホーム', '/ja/about'],
   ] as const)('renders the About link for %s', (locale, home, aboutHref) => {
     mockedLocale = locale
     const html = renderToStaticMarkup(
@@ -35,8 +35,8 @@ describe('ViewerNav', () => {
     )
     expect(html).toContain(`aria-label="${home}"`)
     expect(html).toContain('>About</a>')
-    expect(html).toContain('aria-label="About Artifact Share"')
-    expect(html).toContain('About Artifact Share')
+    expect(html).toContain('aria-label="About Icon Share"')
+    expect(html).toContain('About Icon Share')
     expect(html).toContain(`href="${aboutHref}"`)
     expect(html).not.toContain('href="/start"')
     expect(html).not.toContain('href="/ja/start"')

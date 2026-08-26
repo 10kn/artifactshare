@@ -1,7 +1,7 @@
 **Last updated:** 2026-08-19
 
-Artifact Share is provided by TechTalk, Inc. The service lets signed-in users
-upload HTML and Markdown files, store them in Artifact Share infrastructure, and
+Icon Share is provided by TechTalk, Inc. The service lets signed-in users
+upload HTML and Markdown files, store them in Icon Share infrastructure, and
 share them through app-managed access controls.
 
 ## Information We Collect
@@ -37,13 +37,13 @@ records from before this feature became available.
 
 ## Google Data
 
-Artifact Share uses Google for sign-in and for analytics (see Analytics below).
+Icon Share uses Google for sign-in and for analytics (see Analytics below).
 Sign-in uses the OIDC scopes `openid`, `email`, and `profile`. We do not request
 permission to read or write user files.
 
 ## Analytics
 
-Artifact Share uses Google Analytics 4, a web analytics service provided by
+Icon Share uses Google Analytics 4, a web analytics service provided by
 Google, to understand how the service is used. For this purpose, we send the
 following information to Google:
 
@@ -57,9 +57,9 @@ following information to Google:
   after signing in, and across sessions and devices
 
 This identifier is derived by hashing an internal account identifier used
-within Artifact Share. It is not your email address, name, or the internal
+within Icon Share. It is not your email address, name, or the internal
 account identifier itself, and it cannot be reversed to any of them without a
-secret that only Artifact Share holds. On its own, it does not directly
+secret that only Icon Share holds. On its own, it does not directly
 identify you. However, because it lets the same user's activity be connected
 within Google Analytics, we do not treat the risk of re-identification as
 zero.
@@ -77,7 +77,7 @@ shared page, or by using Google's [Analytics Opt-out Browser Add-on](https://too
 Withdrawing consent, or turning analytics off, stops future collection; it
 does not delete data already sent to Google.
 
-Artifact Share also measures the first time a signed-in user posts a file
+Icon Share also measures the first time a signed-in user posts a file
 through the CLI or MCP. The CLI and MCP do not go through a browser, so the
 browser-based analytics described above cannot capture this. Instead, our
 server sends an event directly to Google using the GA4 Measurement Protocol, a
@@ -95,7 +95,7 @@ server-side measurement.
 
 ## Cookies
 
-Artifact Share uses cookies for the following purposes:
+Icon Share uses cookies for the following purposes:
 
 - Keeping you signed in (required to use the service)
 - Remembering your display language and theme (for example, `__as_locale`)

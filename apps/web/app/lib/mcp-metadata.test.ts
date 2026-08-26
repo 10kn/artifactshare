@@ -14,7 +14,7 @@ const EXPECTED_CLAUDE =
 describe('cursorMcpInstallUrl', () => {
   test('base64-encodes the bare { url } config Cursor expects', () => {
     expect(
-      cursorMcpInstallUrl('Artifact Share', 'https://artifactshare.com/mcp'),
+      cursorMcpInstallUrl('Icon Share', 'https://artifactshare.com/mcp'),
     ).toBe(EXPECTED_CURSOR)
   })
 })
@@ -23,7 +23,7 @@ describe('claudeCustomConnectorUrl', () => {
   test('prefills Claude custom connector name and URL', () => {
     expect(
       claudeCustomConnectorUrl(
-        'Artifact Share',
+        'Icon Share',
         'https://artifactshare.com/mcp',
       ),
     ).toBe(EXPECTED_CLAUDE)

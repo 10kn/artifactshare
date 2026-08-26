@@ -1503,7 +1503,7 @@ export async function seedDevScreenState(
       .values({
         id: `${workspaceId}-slack`,
         team_id: `team-${workspaceId}`,
-        team_name: 'Artifact Share Dev',
+        team_name: 'Icon Share Dev',
         bot_user_id: `bot-${workspaceId}`,
         bot_token: 'dev-screen-fixture',
         installed_by_user_id: userId,
@@ -1546,7 +1546,7 @@ export async function seedDevScreenState(
         rotation_request_hash: null,
         rotation_retry_until: null,
         rotation_session_id: null,
-        device_name: 'Artifact Share CLI on darwin arm64 (default, a1b2c3d4)',
+        device_name: 'Icon Share CLI on darwin arm64 (default, a1b2c3d4)',
         device_id: 'a1b2c3d4-example-device-id',
         revocation_batch_id: null,
       })

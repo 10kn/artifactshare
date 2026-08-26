@@ -13,7 +13,7 @@ vi.mock('~/hooks/use-t', () => ({
     t: (key: string) =>
       ({
         'vw.back': 'Back',
-        'vw.homeLink': 'Artifact Share home',
+        'vw.homeLink': 'Icon Share home',
       })[key] ?? key,
     tPlural: (key: string, n: number) => `${n}`,
   }),
@@ -68,8 +68,8 @@ describe('ViewerErrorShell', () => {
     )
 
     expect(html).toContain('href="/"')
-    expect(html).toContain('aria-label="Artifact Share home"')
-    expect(html).toContain('>Artifact Share<')
+    expect(html).toContain('aria-label="Icon Share home"')
+    expect(html).toContain('>Icon Share<')
     expect(html).not.toContain('aria-label="Back"')
     expect(html).not.toContain('data-regression-region=')
     expect(html.match(/<main\b/g) ?? []).toHaveLength(1)

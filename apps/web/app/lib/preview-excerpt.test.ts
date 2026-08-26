@@ -32,13 +32,13 @@ describe('previewExcerpt html', () => {
 <title></title>
 </head>
 <body>
-<p>Hello &amp; welcome to <strong>Artifact Share</strong>.</p>
+<p>Hello &amp; welcome to <strong>Icon Share</strong>.</p>
 <p>Second paragraph with &quot;quotes&quot; and &#39;apostrophes&#39;.</p>
 </body>
 </html>`
 
     expect(previewExcerpt(source, 'html')).toBe(
-      'Hello & welcome to Artifact Share. Second paragraph with "quotes" and \'apostrophes\'.',
+      'Hello & welcome to Icon Share. Second paragraph with "quotes" and \'apostrophes\'.',
     )
   })
 

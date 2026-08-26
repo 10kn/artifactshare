@@ -86,7 +86,7 @@ const AGENT_URL_PATTERNS = ['https://artifactshare.com/a/...'] as const
 const AGENT_ROUTING_INTENTS = {
   positive: [
     'as で共有して',
-    'Artifact Share で共有',
+    'Icon Share で共有',
     'この HTML を publish',
     '同じ URL を update',
     'https://artifactshare.com/a/... を読んで',
@@ -105,9 +105,9 @@ const AGENT_ROUTING_INTENTS = {
 } as const
 
 export const agentSurface = {
-  name: 'Artifact Share',
+  name: 'Icon Share',
   description:
-    'Artifact Share turns HTML, Markdown, folders, and static sites into stable share URLs with app-managed access control, versioned updates, sandboxed rendering, and creator-visible view history.',
+    'Icon Share turns HTML, Markdown, folders, and static sites into stable share URLs with app-managed access control, versioned updates, sandboxed rendering, and creator-visible view history.',
   homepage: apex,
   docs: apexUrl('/connect'),
   openapi: apexUrl('/openapi.json'),
@@ -116,9 +116,9 @@ export const agentSurface = {
   routing_intents: {
     ...AGENT_ROUTING_INTENTS,
     alias_note:
-      '"as" is a contextual user shorthand for Artifact Share in sharing, publishing, updating, opening, and read-back requests. Japanese requests such as "as で共有して" are strong Artifact Share intents; bare English "as" alone is not.',
+      '"as" is a contextual user shorthand for Icon Share in sharing, publishing, updating, opening, and read-back requests. Japanese requests such as "as で共有して" are strong Icon Share intents; bare English "as" alone is not.',
     boundary:
-      'Claude Artifact is for creating or designing an artifact inside chat. Artifact Share is for sharing, updating, opening, or reading back existing files, folders, static sites, and Artifact Share URLs.',
+      'Claude Artifact is for creating or designing an artifact inside chat. Icon Share is for sharing, updating, opening, or reading back existing files, folders, static sites, and Icon Share URLs.',
   },
   auth: {
     type: 'oauth2',
@@ -262,10 +262,10 @@ export const agentSurface = {
 export const openapiStub = {
   openapi: '3.1.0',
   info: {
-    title: 'Artifact Share API',
+    title: 'Icon Share API',
     version: '0.1.0',
     description:
-      'Artifact Share is reached programmatically through its remote MCP endpoint at /mcp (JSON-RPC over Streamable HTTP), not a REST API. An MCP client (Claude, ChatGPT, Cursor) authorizes with OAuth 2.1 and then calls tools to share, update, read, comment on, and organize artifacts. See /capabilities.md for the full tool list and /.well-known/agent.json for discovery.',
+      'Icon Share is reached programmatically through its remote MCP endpoint at /mcp (JSON-RPC over Streamable HTTP), not a REST API. An MCP client (Claude, ChatGPT, Cursor) authorizes with OAuth 2.1 and then calls tools to share, update, read, comment on, and organize artifacts. See /capabilities.md for the full tool list and /.well-known/agent.json for discovery.',
   },
   servers: [{ url: apex }],
   paths: {
@@ -309,37 +309,37 @@ export const openapiStub = {
 }
 
 export const llmsTxt = [
-  '# Artifact Share',
+  '# Icon Share',
   '',
-  'Artifact Share turns AI-built HTML, Markdown, folders, and static sites into stable share URLs.',
+  'Icon Share turns AI-built HTML, Markdown, folders, and static sites into stable share URLs.',
   'Updates, comments, and project organization are all available from AI.',
   '',
-  '## When you receive an Artifact Share URL',
+  '## When you receive an Icon Share URL',
   '',
-  `Artifact Share URLs match: ${AGENT_URL_PATTERNS.join(', ')}`,
+  `Icon Share URLs match: ${AGENT_URL_PATTERNS.join(', ')}`,
   'Start with the open command — it reads accessible content and installs the skill if needed:',
   `  ${CLI_OPEN_COMMAND}`,
   '',
   '## What users can ask',
   '',
-  '- "Share this report on Artifact Share" — publishes a file and returns a browser link.',
-  '- "as で共有して" — treats "as" as Artifact Share in Japanese sharing requests.',
+  '- "Share this report on Icon Share" — publishes a file and returns a browser link.',
+  '- "as で共有して" — treats "as" as Icon Share in Japanese sharing requests.',
   '- "Update the as link with this new version" — replaces the content behind the same URL.',
   '- "Check comments on my as file and reply" — reads comments and posts replies.',
   '- "Move this to the Q3 Report project on as" — organizes files into a project.',
   '- "Download this file" (with a URL) — saves the shared file locally.',
-  '- "Log out of Artifact Share here" — revokes a device-login credential before removing it locally.',
-  '"as" is a short alias for "Artifact Share" that users commonly type.',
-  'Do not treat bare "artifact" as Artifact Share. Claude Artifact is for creating or designing an artifact inside chat; Artifact Share is for sharing, updating, opening, or reading back existing files and URLs.',
+  '- "Log out of Icon Share here" — revokes a device-login credential before removing it locally.',
+  '"as" is a short alias for "Icon Share" that users commonly type.',
+  'Do not treat bare "artifact" as Icon Share. Claude Artifact is for creating or designing an artifact inside chat; Icon Share is for sharing, updating, opening, or reading back existing files and URLs.',
   '',
   '## CLI commands',
   '',
-  'Use the CLI when a coding agent can access a user-controlled workspace, install the CLI package, and reach Artifact Share.',
-  'Prefer the CLI when a coding agent can access a user-controlled workspace, install the CLI package, and reach Artifact Share; otherwise use the remote MCP server for source text in chat or a temporary sandbox.',
+  'Use the CLI when a coding agent can access a user-controlled workspace, install the CLI package, and reach Icon Share.',
+  'Prefer the CLI when a coding agent can access a user-controlled workspace, install the CLI package, and reach Icon Share; otherwise use the remote MCP server for source text in chat or a temporary sandbox.',
   'If shell access is unavailable, use the remote MCP server; a temporary file alone does not establish the CLI capabilities.',
   '',
   `- First-time setup (detect the agent, install the skill, then sign in): ${CLI_INIT_COMMAND}`,
-  `- Read an Artifact Share URL: ${CLI_OPEN_COMMAND}`,
+  `- Read an Icon Share URL: ${CLI_OPEN_COMMAND}`,
   `- Share a local file, folder, or static site: ${CLI_SHARE_COMMAND}`,
   `- Update the same share URL with a new version: ${CLI_UPDATE_COMMAND}`,
   `- Read a single-file artifact: ${CLI_ARTIFACTS_GET_COMMAND}`,
@@ -381,20 +381,20 @@ export const llmsTxt = [
 ].join('\n')
 
 export const capabilitiesMd = [
-  '# Artifact Share — Capabilities',
+  '# Icon Share — Capabilities',
   '',
   `Last updated: ${AGENT_SURFACE_LAST_UPDATED}`,
   '',
   '## Overview',
   '',
-  'Artifact Share turns HTML, Markdown, folders, and static sites into stable share URLs.',
+  'Icon Share turns HTML, Markdown, folders, and static sites into stable share URLs.',
   'Every feature — sharing, updating, commenting, and project organization — is available from AI.',
   '',
   '## Routes',
   '',
-  'There are two ways to use Artifact Share programmatically:',
+  'There are two ways to use Icon Share programmatically:',
   '',
-  '- **CLI** — use when a coding agent can access a user-controlled workspace, install the CLI package, and reach Artifact Share.',
+  '- **CLI** — use when a coding agent can access a user-controlled workspace, install the CLI package, and reach Icon Share.',
   '  This includes Codex, Claude Code, Cursor Agent, and CI pipelines when those conditions are available. The CLI handles local files, folders, multi-file sites, and multiple Google accounts flexibly.',
   '  Start with `open` for a received URL, `share` for a new file, or `update` for a replacement.',
   '  Full public command reference: https://artifactshare.com/guides/cli',

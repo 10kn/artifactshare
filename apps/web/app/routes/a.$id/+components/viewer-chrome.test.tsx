@@ -14,7 +14,7 @@ vi.mock('~/hooks/use-t', () => ({
     t: (key: string, vars?: Record<string, string | number>) =>
       ({
         'vw.back': 'Back',
-        'vw.homeLink': 'Artifact Share home',
+        'vw.homeLink': 'Icon Share home',
         'vw.copyUrl': 'Copy URL',
         'vw.more': 'More',
         'vw.versionHistory': 'History & add new version',
@@ -27,8 +27,8 @@ vi.mock('~/hooks/use-t', () => ({
         'vw.downloadMarkdown': 'Download Markdown',
         'vw.downloadPdf': 'Download PDF',
         'vw.move': 'Move to another place',
-        'vw.collapseChrome': 'Collapse Artifact Share',
-        'vw.expandChrome': 'Show Artifact Share',
+        'vw.collapseChrome': 'Collapse Icon Share',
+        'vw.expandChrome': 'Show Icon Share',
         'vw.editTitleLabel': `Edit title: ${vars?.title ?? ''}`,
         'vw.editTitleInputLabel': 'Artifact title',
         'vw.titleEditPlaceholder':
@@ -155,8 +155,8 @@ describe('ViewerChrome', () => {
       collapsible: false,
     })
 
-    expect(html).toContain('aria-label="Artifact Share home"')
-    expect(html).toContain('>Artifact Share<')
+    expect(html).toContain('aria-label="Icon Share home"')
+    expect(html).toContain('>Icon Share<')
     expect(html).not.toContain('aria-label="Back"')
   })
 
@@ -194,7 +194,7 @@ describe('ViewerChrome', () => {
     })
 
     expect(html).toContain('aria-expanded="true"')
-    expect(html).toContain('aria-label="Collapse Artifact Share"')
+    expect(html).toContain('aria-label="Collapse Icon Share"')
     expect(html).toContain('aria-controls="viewer-topbar"')
   })
 
@@ -213,8 +213,8 @@ describe('ViewerChrome', () => {
     })
 
     expect(html).toContain('aria-expanded="false"')
-    expect(html).toContain('aria-label="Show Artifact Share"')
-    expect(html).toContain('>Artifact Share<')
+    expect(html).toContain('aria-label="Show Icon Share"')
+    expect(html).toContain('>Icon Share<')
   })
 
   test('logged-in user sees export actions in the more menu', () => {

@@ -1,14 +1,14 @@
 **Last updated:** 2026-08-16
 
-Artifact Share is provided by TechTalk, Inc. The service lets signed-in users
-upload HTML and Markdown files, store them in Artifact Share infrastructure, and
+Icon Share is provided by TechTalk, Inc. The service lets signed-in users
+upload HTML and Markdown files, store them in Icon Share infrastructure, and
 share browser-viewable links with app-managed access controls.
 
 ## Your Content
 
 You retain all rights to files you upload. You grant us the limited license
 needed to store, process, transmit, and display those files to viewers permitted
-by your Artifact Share settings.
+by your Icon Share settings.
 
 ## Acceptable Use
 
@@ -19,7 +19,7 @@ sandboxing, access controls, quotas, or service infrastructure protections.
 ## Storage and Removal
 
 File bodies are stored in Cloudflare R2. When you delete a file,
-Artifact Share deletes the stored object and ordinary related database rows.
+Icon Share deletes the stored object and ordinary related database rows.
 Minimal security-audit identifiers for successful MCP publishing and updating
 remain for 400 days and may remain longer when deletion is delayed or while a
 backup copy is retained. They contain no file content or credentials.

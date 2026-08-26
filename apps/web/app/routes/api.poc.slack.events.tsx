@@ -104,7 +104,7 @@ function createPocSlackApp(
         unfurls: buildAuthRequiredUnfurls(linkUrls),
         user_auth_required: true,
         user_auth_url: authUrl,
-        user_auth_message: 'Connect Artifact Share to inspect this link.',
+        user_auth_message: 'Connect Icon Share to inspect this link.',
       })
       console.log('[poc.slack.unfurl] auth_required_response', {
         pocPath,
@@ -159,11 +159,11 @@ function buildAuthRequiredUnfurls(urls: string[]): LinkUnfurls {
     urls.map((url) => [
       url,
       {
-        fallback: 'Artifact Share auth-required PoC',
+        fallback: 'Icon Share auth-required PoC',
         color: '#64748b',
         blocks: [
           sectionBlock(
-            '*Artifact Share PoC A*\nInitial `chat.unfurl` with `user_auth_required: true`.',
+            '*Icon Share PoC A*\nInitial `chat.unfurl` with `user_auth_required: true`.',
           ),
           actionsBlock(url, 'Open posted URL'),
         ],
@@ -177,11 +177,11 @@ function buildRichUnfurls(urls: string[], slackUserId: string): LinkUnfurls {
     urls.map((url) => [
       url,
       {
-        fallback: 'Artifact Share rich follow-up PoC',
+        fallback: 'Icon Share rich follow-up PoC',
         color: '#16a34a',
         blocks: [
           sectionBlock(
-            `*Artifact Share PoC B*\nRich follow-up blocks sent after auth-required unfurl.\nPosted by Slack user: \`${slackUserId}\``,
+            `*Icon Share PoC B*\nRich follow-up blocks sent after auth-required unfurl.\nPosted by Slack user: \`${slackUserId}\``,
           ),
           sectionBlock(
             'Observe from another channel member whether this rich block is broadcast or per-user.',

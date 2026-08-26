@@ -205,7 +205,7 @@ describe('renderMarkdownDocument', () => {
 
   test('prioritizes contents and collapses secondary navigation', () => {
     const out = renderMarkdownDocument(
-      '---\ntitle: Report\nauthor: Artifact Share\n---\n# Start\n## Next',
+      '---\ntitle: Report\nauthor: Icon Share\n---\n# Start\n## Next',
     )
 
     expect(out).toContain('<nav class="md-toc md-toc-desktop"')

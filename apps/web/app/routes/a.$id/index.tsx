@@ -177,7 +177,7 @@ type LoaderData =
         derivedTitle: string | null
         titleOverride: string | null
         // CTA 分岐に使う: workspace はアクセス依頼、private は creator
-        // (= owner) に Artifact Share 側で grants 追加依頼
+        // (= owner) に Icon Share 側で grants 追加依頼
         visibility: Visibility
         ownerEmail: string | null
       }
@@ -232,10 +232,10 @@ type SharePreviewArtifact = {
 }
 
 function preauthMetaDescription(canonicalUrl: string) {
-  return `This Artifact Share file requires sign-in with an allowed account. AI assistants cannot read the file contents from this unauthenticated page. Shell-capable agents can try ${buildPreauthCliOpenCommand(canonicalUrl)}.`
+  return `This Icon Share file requires sign-in with an allowed account. AI assistants cannot read the file contents from this unauthenticated page. Shell-capable agents can try ${buildPreauthCliOpenCommand(canonicalUrl)}.`
 }
 
-const PREAUTH_OG_DESCRIPTION = 'Shared via Artifact Share'
+const PREAUTH_OG_DESCRIPTION = 'Shared via Icon Share'
 
 export async function loader({
   params,
@@ -1197,20 +1197,20 @@ async function loadHistoryVersions(
 export function meta({ loaderData }: Route.MetaArgs) {
   const robots = { name: 'robots', content: 'noindex, nofollow' }
   if (loaderData?.kind === 'preauth') {
-    const title = 'Artifact Share'
+    const title = 'Icon Share'
     const description = preauthMetaDescription(loaderData.canonicalUrl)
     const tags: Array<
       | { title: string }
       | { property: string; content: string }
       | { name: string; content: string }
     > = [
-      { title: `${title} · Artifact Share` },
+      { title: `${title} · Icon Share` },
       robots,
       { name: 'description', content: description },
       { property: 'og:title', content: title },
       { property: 'og:description', content: PREAUTH_OG_DESCRIPTION },
       { property: 'og:type', content: 'website' },
-      { property: 'og:site_name', content: 'Artifact Share' },
+      { property: 'og:site_name', content: 'Icon Share' },
       { property: 'og:url', content: loaderData.canonicalUrl },
     ]
     return tags
@@ -1222,7 +1222,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
       loaderData.canonicalUrl,
     )
   }
-  return [{ title: 'Artifact Share' }, robots]
+  return [{ title: 'Icon Share' }, robots]
 }
 
 function sharedPreviewMeta(
@@ -1239,7 +1239,7 @@ function sharedPreviewMeta(
     | { title: string }
     | { property: string; content: string }
     | { name: string; content: string }
-  > = [{ title: `${title} · Artifact Share` }, robots]
+  > = [{ title: `${title} · Icon Share` }, robots]
   if (artifact.visibility === 'link') {
     const description = sharedPreviewDescription(artifact)
     const imageUrl = new URL(
@@ -1254,7 +1254,7 @@ function sharedPreviewMeta(
         description,
         url: canonicalUrl,
         image: imageUrl.toString(),
-        imageAlt: `${title} on Artifact Share`,
+        imageAlt: `${title} on Icon Share`,
       }),
     )
   }
