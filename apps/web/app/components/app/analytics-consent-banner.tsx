@@ -5,6 +5,7 @@ import { Button } from '~/components/ui/button'
 import { useT } from '~/hooks/use-t'
 import type { AnalyticsConsentResolution } from '~/lib/analytics-consent'
 import { withLang } from '~/lib/connect-link'
+import { HIDE_PUBLIC_LEGAL_NAV } from '~/lib/instance-policy'
 import { cn } from '~/lib/utils'
 import { useAnalyticsConsent } from './analytics-consent-provider'
 
@@ -19,7 +20,8 @@ export function AnalyticsConsentBanner() {
   const bannerRef = useRef<HTMLDivElement>(null)
   const submittedRef = useRef(false)
   const visible =
-    (rootData?.analyticsConsent?.showBanner ?? false) || manualOpen
+    !HIDE_PUBLIC_LEGAL_NAV &&
+    ((rootData?.analyticsConsent?.showBanner ?? false) || manualOpen)
   const submitting = fetcher.state !== 'idle'
 
   useLayoutEffect(() => {
