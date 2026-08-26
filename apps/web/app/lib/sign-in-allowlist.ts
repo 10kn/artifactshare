@@ -1,4 +1,7 @@
-import { normalizeEmailDomain } from '~/lib/workspace-domains'
+import {
+  normalizeEmailDomain,
+  normalizeGoogleEmailAddress,
+} from '~/lib/workspace-domains'
 
 export type SignInAllowlist = {
   emails: Set<string>
@@ -21,14 +24,14 @@ export function parseSignInAllowlist(input: {
   const emails = new Set<string>()
   const domains = new Set<string>()
   for (const item of parseAllowlistList(input.emailsRaw)) {
-    if (item.includes('@')) emails.add(item)
+    if (item.includes('@')) emails.add(normalizeGoogleEmailAddress(item))
     else {
       const domain = normalizeEmailDomain(item)
       if (domain) domains.add(domain)
     }
   }
   for (const item of parseAllowlistList(input.domainsRaw)) {
-    if (item.includes('@')) emails.add(item)
+    if (item.includes('@')) emails.add(normalizeGoogleEmailAddress(item))
     else {
       const domain = normalizeEmailDomain(item)
       if (domain) domains.add(domain)
@@ -50,7 +53,7 @@ export function emailMatchesAllowlist(
   hd: string | null | undefined,
   list: SignInAllowlist,
 ): boolean {
-  const normalized = email.trim().toLowerCase()
+  const normalized = normalizeGoogleEmailAddress(email)
   if (!normalized) return false
   if (list.emails.has(normalized)) return true
   const emailDomain = normalizeEmailDomain(normalized)
