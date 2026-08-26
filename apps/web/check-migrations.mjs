@@ -43,6 +43,8 @@ const allowedProtectedDrops = new Map([
     ['project_grants', 'projects'],
   ],
   ['0045_project_share_default_roles.sql', ['project_share_defaults']],
+  // Rebuild users to drop UNIQUE google_sub (ALTER DROP COLUMN refuses UNIQUE).
+  ['0089_drop_users_google_sub.sql', ['users']],
 ])
 
 const allowedProtectedDeletes = new Map([
@@ -65,6 +67,7 @@ const allowedProtectedRenameDestinations = new Map([
     '0045_project_share_default_roles.sql',
     ['project_share_defaults_new->project_share_defaults'],
   ],
+  ['0089_drop_users_google_sub.sql', ['users_new->users']],
 ])
 const allowedProtectedDropColumns = new Map([
   ['0022_workspace_plan_storage.sql', ['users']],
@@ -143,6 +146,10 @@ const allowedLegacyDrops = new Map([
       'container_slack_channels_tmp',
       '_migration_0087_guard',
     ],
+  ],
+  [
+    '0089_drop_users_google_sub.sql',
+    ['users_new', '_migration_0089_guard'],
   ],
 ])
 
