@@ -17,3 +17,10 @@ export const EMAIL_OTP_SIGN_IN: boolean = false
 export const BILLING_ENABLED: boolean = false
 /** Plan written on workspace create when BILLING_ENABLED is false. */
 export const SELF_HOST_PLAN = 'plus' as const
+/**
+ * Cloudflare Flagship (`FLAGS` binding). This self-host has no Flagship
+ * binding; keep false so upload/maintenance do not fail closed in production.
+ * Do not set APP_ENV to a non-production value as a Flagship workaround —
+ * that rewrites sandbox iframe URLs to sandbox.localhost.
+ */
+export const FLAGSHIP_REQUIRED: boolean = false

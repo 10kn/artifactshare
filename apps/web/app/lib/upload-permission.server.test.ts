@@ -96,19 +96,19 @@ describe('upload permission allowlist', () => {
     })
   })
 
-  test('fails closed in production when the binding is missing', async () => {
+  test('allows production uploads when Flagship is not required and binding is missing', async () => {
     expect(
       await checkUploadPermission(user, { APP_ENV: 'production' }),
-    ).toEqual({ kind: 'missing-flagship-binding' })
+    ).toEqual({ kind: 'allowed' })
   })
 
-  test('fails closed in production when the binding is malformed', async () => {
+  test('allows production uploads when Flagship is not required and binding is malformed', async () => {
     expect(
       await checkUploadPermission(user, {
         APP_ENV: 'production',
         FLAGS: {},
       }),
-    ).toEqual({ kind: 'missing-flagship-binding' })
+    ).toEqual({ kind: 'allowed' })
   })
 
   test('fails closed when Flagship evaluation throws', async () => {

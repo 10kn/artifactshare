@@ -4,6 +4,7 @@ import {
   type FlagshipFlagsBinding,
 } from './flagship-fallback.server'
 import { normalizeGrantEmail } from './grant-emails'
+import { FLAGSHIP_REQUIRED } from './instance-policy'
 
 export const UPLOAD_ALLOWED_FLAG_KEY = 'upload-allowed'
 
@@ -52,8 +53,11 @@ export async function checkUploadPermission(
     case 'evaluated':
       return result.enabled ? { kind: 'allowed' } : { kind: 'not-allowed' }
     case 'missing-binding':
-      if (result.production) {
+      if (result.production && FLAGSHIP_REQUIRED) {
         return { kind: 'missing-flagship-binding' }
+      }
+      if (result.production && !FLAGSHIP_REQUIRED) {
+        return { kind: 'allowed' }
       }
       return result.enabled ? { kind: 'allowed' } : { kind: 'not-allowed' }
     case 'evaluation-error':
