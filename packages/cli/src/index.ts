@@ -127,7 +127,7 @@ async function runGunshi(argv: string[]): Promise<string | undefined> {
 async function cliOptions(version = loadCliVersion()) {
   return {
     name: 'artifactshare',
-    description: 'Artifact Share CLI',
+    description: 'Icon Share CLI',
     version: await version,
     subCommands: {
       login: lazyCommand(loginDefinition, loginRunner),
@@ -183,7 +183,7 @@ const commonArgs = {
     type: 'string',
     toKebab: true,
     description:
-      'Artifact Share base URL (default: ARTIFACTSHARE_BASE_URL or https://artifactshare.com)',
+      'Icon Share base URL (default: ARTIFACTSHARE_BASE_URL or https://icon-share.mixmaxjam.workers.dev)',
   },
   token: {
     type: 'string',
@@ -210,7 +210,7 @@ const commonArgs = {
 
 const entryCommand = define({
   name: 'artifactshare',
-  description: 'Artifact Share CLI',
+  description: 'Icon Share CLI',
   toKebab: true,
   args: commonArgs,
   examples: `npx --yes @artifactshare/cli init --json
@@ -250,7 +250,7 @@ Common failures:
   auth_required          Use ${TOKEN_ENV_VAR} or ${TOKEN_OPTION}; tokens are issued at ${DEFAULT_BASE_URL}/settings/tokens
   invalid_destination    Choose --project-id <id> or --home
   target_not_found       Use an artifact ID, share URL, or sandbox URL
-  upload_not_allowed     Sharing is temporarily unavailable; contact Artifact Share support`,
+  upload_not_allowed     Sharing is temporarily unavailable; contact Icon Share support`,
   run: () => {},
 })
 
@@ -378,7 +378,7 @@ For repeat jobs, use --key: first share creates the artifact, later runs add ver
 
 Common failures:
   auth_required          Set ARTIFACTSHARE_TOKEN before share
-  upload_not_allowed     Publishing is temporarily unavailable; contact Artifact Share support
+  upload_not_allowed     Publishing is temporarily unavailable; contact Icon Share support
   file_too_large         Reduce file or directory size and retry
   validation_failed      Check file type (.html / .md for single files) and directory layout
   key_target_moved       The artifact for --key moved; update it by ID or use a new key
@@ -409,7 +409,7 @@ Common failures:
   auth_required          Set ARTIFACTSHARE_TOKEN before update
   target_not_found       Retry with an artifact ID, share URL, or sandbox URL
   artifact_kind_mismatch Use a file for single-file artifacts or a directory for static sites
-  upload_not_allowed     Publishing is temporarily unavailable; contact Artifact Share support
+  upload_not_allowed     Publishing is temporarily unavailable; contact Icon Share support
   file_too_large         Reduce file or directory size and retry
   validation_failed      Check file type (.html / .md for single files) and directory layout`,
 })
@@ -597,7 +597,7 @@ Common failures:
 
 const openDefinition = define({
   name: 'open',
-  description: 'Prepare agent skills and read an Artifact Share URL.',
+  description: 'Prepare agent skills and read an Icon Share URL.',
   toKebab: true,
   args: {
     ...commonArgs,
@@ -610,8 +610,8 @@ const openDefinition = define({
   examples: `npx --yes @artifactshare/cli open https://artifactshare.com/a/abc123def4 --json
   npx --yes @artifactshare/cli open abc123def4 --json
 
-Use this as the first command when an agent receives an Artifact Share URL.
-It installs or updates the bundled Artifact Share skill in user scope (Claude Code,
+Use this as the first command when an agent receives an Icon Share URL.
+It installs or updates the bundled Icon Share skill in user scope (Claude Code,
 Codex, or Cursor detected from the working directory; all three if none are
 detected), then reads single-file artifacts. Cursor project scope is not
 auto-installed; use skills install --tool cursor --scope project. Existing
@@ -742,7 +742,7 @@ Common failures:
 
 const artifactsDefinition = define({
   name: 'artifacts',
-  description: 'Read Artifact Share artifacts.',
+  description: 'Read Icon Share artifacts.',
   toKebab: true,
   args: commonArgs,
   subCommands: {
@@ -1172,7 +1172,7 @@ The response includes project.id and next_command for share --project-id.
 
 Common failures:
   auth_required          Set ARTIFACTSHARE_TOKEN before projects create
-  upload_not_allowed     Publishing is temporarily unavailable; contact Artifact Share support
+  upload_not_allowed     Publishing is temporarily unavailable; contact Icon Share support
   validation_failed      Pass a non-empty name and valid --visibility`,
 })
 
@@ -1275,7 +1275,7 @@ const skillsToolArgs = {
 
 const skillsInstallDefinition = define({
   name: 'install',
-  description: 'Install the bundled Artifact Share skill for an agent tool.',
+  description: 'Install the bundled Icon Share skill for an agent tool.',
   toKebab: true,
   args: {
     ...commonArgs,
@@ -1291,7 +1291,7 @@ const skillsInstallDefinition = define({
 npx --yes @artifactshare/cli skills install --tool claude --tool cursor --dry-run --json
 
 Writes a managed SKILL.md (codex, claude) or Cursor rule (cursor).
-Files without the Artifact Share managed marker are never overwritten without --force.
+Files without the Icon Share managed marker are never overwritten without --force.
 
 Common failures:
   validation_failed       Pass --tool codex|claude|cursor; cursor supports --scope project only
@@ -1311,7 +1311,7 @@ Runs locally; no network or authentication is used.`,
 
 const skillsUpdateDefinition = define({
   name: 'update',
-  description: 'Update installed Artifact Share skills to the bundled version.',
+  description: 'Update installed Icon Share skills to the bundled version.',
   toKebab: true,
   args: {
     ...commonArgs,
@@ -1334,7 +1334,7 @@ Common failures:
 
 const skillsEnsureDefinition = define({
   name: 'ensure',
-  description: 'Install or update the bundled Artifact Share skill.',
+  description: 'Install or update the bundled Icon Share skill.',
   toKebab: true,
   args: {
     ...commonArgs,
@@ -1361,7 +1361,7 @@ Common failures:
 
 const skillsRemoveDefinition = define({
   name: 'remove',
-  description: 'Remove Artifact Share skills installed by this CLI.',
+  description: 'Remove Icon Share skills installed by this CLI.',
   toKebab: true,
   args: {
     ...commonArgs,
@@ -1394,7 +1394,7 @@ npx --yes @artifactshare/cli skills list --json`,
 const initDefinition = define({
   name: 'init',
   description:
-    'Set up Artifact Share for this directory, or save its defaults.',
+    'Set up Icon Share for this directory, or save its defaults.',
   toKebab: true,
   args: {
     ...commonArgs,

@@ -361,7 +361,7 @@ async function linuxSecretService(
         [
           'store',
           '--label',
-          `Artifact Share ${account}`,
+          `Icon Share ${account}`,
           'service',
           SERVICE,
           'account',

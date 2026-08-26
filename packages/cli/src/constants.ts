@@ -1,7 +1,8 @@
 import type { CliCommand } from './types.js'
 
 export const SCHEMA_VERSION = 2
-export const DEFAULT_BASE_URL = 'https://artifactshare.com'
+export const PRODUCT_DISPLAY_NAME = 'Icon Share'
+export const DEFAULT_BASE_URL = 'https://icon-share.mixmaxjam.workers.dev'
 export const DEVICE_CLIENT_ID = 'artifactshare-cli'
 export const CLI_INVOCATION = 'npx --yes @artifactshare/cli'
 export const AGENT_DOWNLOAD_OUTPUT = './artifact'
