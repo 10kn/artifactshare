@@ -94,6 +94,11 @@ describe('sign-in allowlist', () => {
     ).toBe(false)
   })
 
+  test('googlemail.com matches a gmail.com allowlist email', () => {
+    const list = parseSignInAllowlist({ emailsRaw: 'alice@gmail.com' })
+    expect(emailMatchesAllowlist('alice@googlemail.com', null, list)).toBe(true)
+  })
+
   test('parse treats @domain and mixed csv as domains or emails', () => {
     const list = parseSignInAllowlist({
       domainsRaw: ' Example.COM , @other.io ',
