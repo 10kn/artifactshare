@@ -1,5 +1,6 @@
 import { MESSAGES } from '~/i18n/messages'
 import { APEX_HOST } from '~/lib/hosts'
+import { PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 import { socialMeta } from '~/lib/social-meta'
 
 const HOME_URL = `https://${APEX_HOST}/`
@@ -17,24 +18,19 @@ export function landingMeta(locale: 'en' | 'ja') {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Artifact Share',
-    alternateName: 'Artifact Share',
+    name: PRODUCT_DISPLAY_NAME,
+    alternateName: PRODUCT_DISPLAY_NAME,
     url: canonical,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
     description,
     image: HOME_OG_IMAGE_URL,
-    provider: {
-      '@type': 'Organization',
-      name: 'TechTalk, Inc.',
-      url: 'https://techtalk.jp',
-    },
   }
 
   return [
-    { title: 'Artifact Share' },
+    { title: PRODUCT_DISPLAY_NAME },
     { name: 'description', content: description },
-    { name: 'application-name', content: 'Artifact Share' },
+    { name: 'application-name', content: PRODUCT_DISPLAY_NAME },
     { tagName: 'link', rel: 'canonical', href: canonical },
     { tagName: 'link', rel: 'alternate', hrefLang: 'en', href: HOME_URL },
     { tagName: 'link', rel: 'alternate', hrefLang: 'ja', href: JA_HOME_URL },
@@ -46,7 +42,7 @@ export function landingMeta(locale: 'en' | 'ja') {
     },
     { 'script:ld+json': structuredData },
     ...socialMeta({
-      title: 'Artifact Share',
+      title: PRODUCT_DISPLAY_NAME,
       description,
       url: canonical,
       image: HOME_OG_IMAGE_URL,

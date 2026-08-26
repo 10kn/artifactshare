@@ -1,6 +1,8 @@
 // Shared Open Graph + Twitter card tags for the marketing pages (home, privacy,
 // terms). Each page passes its own title, description, URL, and card image; the
 // fixed tag shape lives here so the pages can't drift apart.
+import { PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
+
 interface SocialMetaInput {
   title: string
   description: string
@@ -14,11 +16,11 @@ export function socialMeta({
   description,
   url,
   image,
-  imageAlt = 'Artifact Share',
+  imageAlt = PRODUCT_DISPLAY_NAME,
 }: SocialMetaInput) {
   return [
     { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: 'Artifact Share' },
+    { property: 'og:site_name', content: PRODUCT_DISPLAY_NAME },
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:url', content: url },

@@ -1,5 +1,6 @@
 import { type Locale } from '~/i18n/messages'
 import { APEX_HOST } from '~/lib/hosts'
+import { PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
 import { htmlExcerpt } from '~/lib/preview-excerpt'
 import type { UpdateDetail, UpdateProduct } from '~/lib/updates-types'
 import { socialMeta } from '~/lib/social-meta'
@@ -21,14 +22,12 @@ const UPDATES_LIST_META: Record<
   { title: string; description: string }
 > = {
   en: {
-    title: 'Updates · Artifact Share',
-    description:
-      'Recent improvements and changes to Artifact Share for Web, CLI, MCP, and AI agent workflows.',
+    title: `Updates · ${PRODUCT_DISPLAY_NAME}`,
+    description: `Recent improvements and changes to ${PRODUCT_DISPLAY_NAME} for Web, CLI, MCP, and AI agent workflows.`,
   },
   ja: {
-    title: '更新情報 · Artifact Share',
-    description:
-      'Artifact Share の Web、CLI、MCP、AI エージェント向け機能の改善と変更をお知らせします。',
+    title: `更新情報 · ${PRODUCT_DISPLAY_NAME}`,
+    description: `${PRODUCT_DISPLAY_NAME} の Web、CLI、MCP、AI エージェント向け機能の改善と変更をお知らせします。`,
   },
 }
 
@@ -104,7 +103,7 @@ export function updateOgDescription(bodyHtml: string, maxChars = 160): string {
 export function updatesDetailMeta(entry: UpdateDetail, locale: Locale) {
   const canonical = canonicalForEntry(entry.slug, locale)
   const description = updateOgDescription(entry.bodyHtml)
-  const pageTitle = `${entry.title} · Artifact Share`
+  const pageTitle = `${entry.title} · ${PRODUCT_DISPLAY_NAME}`
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
