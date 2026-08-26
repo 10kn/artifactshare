@@ -31,7 +31,7 @@ home 投稿のたびに `--visibility private` を付けたくない場合は、
 npx --yes @artifactshare/cli config set home_audience private --scope user
 ```
 
-以後、この CLI 環境からの新しい home 投稿は、指定なしでも private になります。設定は端末ごとに保存され、Artifact Share アカウントには同期されません。PC からも home 投稿をするなら、PC 側でも同じコマンドを実行します。
+以後、この CLI 環境からの新しい home 投稿は、指定なしでも private になります。設定は端末ごとに保存され、Icon Share アカウントには同期されません。PC からも home 投稿をするなら、PC 側でも同じコマンドを実行します。
 
 ## 非公開にならないときはリポジトリ設定が優先されている
 

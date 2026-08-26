@@ -68,10 +68,10 @@ const WIDGET_HTML = `
 <div id="as-card">
   <div id="as-mark" aria-hidden="true">AS</div>
   <div id="as-body">
-    <div id="as-eyebrow">Artifact Share</div>
+    <div id="as-eyebrow">Icon Share</div>
     <div id="as-title">Artifact</div>
     <div id="as-actions">
-      <a id="as-open" target="_blank" rel="noopener noreferrer">Open in Artifact Share ↗</a>
+      <a id="as-open" target="_blank" rel="noopener noreferrer">Open in Icon Share ↗</a>
     </div>
   </div>
 </div>
@@ -134,11 +134,11 @@ const WIDGET_HTML = `
       ja: 'アーティファクト',
     };
     titleEl.textContent = data.title || labels[locale];
-    eyebrowEl.textContent = 'Artifact Share · ' + labels[locale];
+    eyebrowEl.textContent = 'Icon Share · ' + labels[locale];
     openLink.textContent =
       locale === 'ja'
-        ? 'Artifact Shareで開く ↗'
-        : 'Open in Artifact Share ↗';
+        ? 'Icon Shareで開く ↗'
+        : 'Open in Icon Share ↗';
     shareLink = validatedHttpsUrl(data.share_url);
     if (shareLink) {
       openLink.href = shareLink;
@@ -185,7 +185,7 @@ const WIDGET_HTML = `
   import('https://esm.sh/@modelcontextprotocol/ext-apps@1.7.5/app-with-deps')
     .then(function (mod) {
       var app = new mod.App(
-        { name: 'Artifact Share card', version: '1.0.0' },
+        { name: 'Icon Share card', version: '1.0.0' },
         {},
         { autoResize: true },
       );
@@ -217,7 +217,7 @@ export function registerArtifactPreviewResource(
     {
       title: 'Artifact card',
       description:
-        'Shows artifact details and opens the full artifact in Artifact Share.',
+        'Shows artifact details and opens the full artifact in Icon Share.',
     },
     () => artifactPreviewResourceContents(appOrigin, mcpServerUrl),
   )

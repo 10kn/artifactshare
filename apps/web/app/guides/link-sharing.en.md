@@ -1,6 +1,6 @@
 # Share a link that opens without sign-in
 
-Link sharing lets anyone with the URL view a file without signing in to Artifact Share. A link can have an end date or, when the workspace policy allows it, no expiration.
+Link sharing lets anyone with the URL view a file without signing in to Icon Share. A link can have an end date or, when the workspace policy allows it, no expiration.
 
 ## Start with Who can view on the web
 
@@ -39,4 +39,4 @@ MCP and CLI create, edit, and get results include `link_expires_at` as either a 
 
 Open a file you own, then use Who can view to choose the audience and link expiration.
 
-[Open Artifact Share](/)
+[Open Icon Share](/)

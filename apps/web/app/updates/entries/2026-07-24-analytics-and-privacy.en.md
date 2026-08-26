@@ -6,7 +6,7 @@ kind: new
 details: privacy
 ---
 
-Artifact Share now uses Google Analytics 4 to see how people move from viewing a shared file, through signing in and creating a workspace, to posting a first file. This helps us find where visitors drop off. The privacy policy has been updated to describe this in full.
+Icon Share now uses Google Analytics 4 to see how people move from viewing a shared file, through signing in and creating a workspace, to posting a first file. This helps us find where visitors drop off. The privacy policy has been updated to describe this in full.
 
 <!-- more -->
 

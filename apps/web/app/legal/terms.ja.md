@@ -1,7 +1,7 @@
 **最終更新:** 2026-08-16
 
-Artifact Share は TechTalk, Inc. が提供します。本サービスは、ログインした
-ユーザーが HTML や Markdown のファイルをアップロードし、Artifact Share の
+Icon Share は TechTalk, Inc. が提供します。本サービスは、ログインした
+ユーザーが HTML や Markdown のファイルをアップロードし、Icon Share の
 インフラ上に保存したうえで、サービス内のアクセス管理に基づく共有リンクとして
 表示できるようにするものです。
 

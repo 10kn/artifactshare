@@ -1,7 +1,7 @@
 **Last updated:** 2026-07-07
 
 This page is the legally required disclosure under the Japanese Specified
-Commercial Transactions Act (特定商取引法) for paid plans of Artifact Share.
+Commercial Transactions Act (特定商取引法) for paid plans of Icon Share.
 The authoritative version is the [Japanese page](/ja/tokushoho).
 
 ## Seller
@@ -56,4 +56,4 @@ You may cancel at any time through the customer portal. After cancellation, you 
 
 ## System Requirements
 
-Artifact Share supports the latest versions of major browsers: Chrome, Safari, Firefox, and Edge.
+Icon Share supports the latest versions of major browsers: Chrome, Safari, Firefox, and Edge.

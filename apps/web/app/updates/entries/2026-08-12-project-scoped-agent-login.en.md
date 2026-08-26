@@ -5,7 +5,7 @@ products: [web, cli]
 kind: improve
 ---
 
-Artifact Share CLI 0.11.0 adds a login preset for AI agents. Run `npx --yes @artifactshare/cli login --preset agent` and choose one project in your browser to create a CLI session limited to that project.
+Icon Share CLI 0.11.0 adds a login preset for AI agents. Run `npx --yes @artifactshare/cli login --preset agent` and choose one project in your browser to create a CLI session limited to that project.
 
 <!-- more -->
 

@@ -31,7 +31,7 @@ If you don't want to add `--visibility private` to every home post, change the d
 npx --yes @artifactshare/cli config set home_audience private --scope user
 ```
 
-From then on, new home posts from this CLI environment are private even without the flag. The setting is stored per device and is not synchronized to your Artifact Share account, so if you also post from a PC, run the same command there.
+From then on, new home posts from this CLI environment are private even without the flag. The setting is stored per device and is not synchronized to your Icon Share account, so if you also post from a PC, run the same command there.
 
 ## If posts still aren't private, a repository setting takes precedence
 

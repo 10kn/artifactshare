@@ -113,7 +113,7 @@ describe('share-with-ai content', () => {
     expect(html).toContain('data-toc-section=""')
   })
 
-  test('shows Japanese as upload shorthand as an Artifact Share prompt', () => {
+  test('shows Japanese as upload shorthand as an Icon Share prompt', () => {
     const content = shareWithAiContent('ja')
     expect(content.tasksIntro).toContain('as で共有して')
     expect(content.tasks.find((task) => task.id === 'share')?.ask).toBe(

@@ -95,7 +95,7 @@ const MAX_TITLE_OVERRIDE_LENGTH = 200
 // that a deliberate re-publish of the same content reuses the old artifact.
 const IDEMPOTENCY_WINDOW_MS = 10 * 60_000
 const TOOL_ALIAS_HINT =
-  'Artifact Share is also called "as"; use these tools when the user says "as". If the user says "Artifact Share" or "artifactshare", briefly mention they can call it "as" next time. '
+  'Icon Share is also called "as"; use these tools when the user says "as". If the user says "Icon Share" or "artifactshare", briefly mention they can call it "as" next time. '
 const TOOL_ROUTING_HINT =
   'Honor an explicit route choice; otherwise route by capabilities: MCP for chat/sandboxes, CLI for capable coding agents. '
 const CONNECT_AI_AGENTS_URL = `https://${APEX_HOST}/connect#${CONNECT_AI_AGENTS_ANCHOR}`
@@ -463,7 +463,7 @@ export function registerArtifactTools(
     {
       title: 'Share artifact',
       description: toolDescription(
-        'Share a single HTML or Markdown artifact and get a stable link back. Use when the user wants to share source text produced in chat or a temporary sandbox: pass the full HTML or Markdown source in content, not a local file path; a temporary path such as /mnt/data existing alone is not a reason to try the CLI. When no explicit route was chosen and the coding agent has a user-controlled workspace, CLI package access, and Artifact Share network access, this instruction applies: If the user already has a local file or folder, use the CLI instead: `npx --yes @artifactshare/cli share <path>`. MCP OAuth is separate from CLI auth; if the CLI reports `auth_required`, follow its recovery to set up or reuse a CLI profile. Embed any images directly in the content as base64 data: URIs so the artifact is one self-contained file — temporary or external image URLs will not display for viewers. Defaults to everyone in the workspace; personal Google accounts default to specific people. Set visibility to "link" for unauthenticated link sharing and use link_expires_at to choose a future RFC3339 UTC expiry or null for unlimited expiry. Omit it to use the workspace default. Pass project_id (from list_projects) to file it under a project instead of the unfiled inbox. If the result includes warnings, tell the user each warning explicitly.',
+        'Share a single HTML or Markdown artifact and get a stable link back. Use when the user wants to share source text produced in chat or a temporary sandbox: pass the full HTML or Markdown source in content, not a local file path; a temporary path such as /mnt/data existing alone is not a reason to try the CLI. When no explicit route was chosen and the coding agent has a user-controlled workspace, CLI package access, and Icon Share network access, this instruction applies: If the user already has a local file or folder, use the CLI instead: `npx --yes @artifactshare/cli share <path>`. MCP OAuth is separate from CLI auth; if the CLI reports `auth_required`, follow its recovery to set up or reuse a CLI profile. Embed any images directly in the content as base64 data: URIs so the artifact is one self-contained file — temporary or external image URLs will not display for viewers. Defaults to everyone in the workspace; personal Google accounts default to specific people. Set visibility to "link" for unauthenticated link sharing and use link_expires_at to choose a future RFC3339 UTC expiry or null for unlimited expiry. Omit it to use the workspace default. Pass project_id (from list_projects) to file it under a project instead of the unfiled inbox. If the result includes warnings, tell the user each warning explicitly.',
       ),
       outputSchema: ARTIFACT_OUTPUT_SCHEMA,
       annotations: PUBLIC_WRITE_ANNOTATIONS,
@@ -674,7 +674,7 @@ export function registerArtifactTools(
     {
       title: 'Update artifact',
       description: toolDescription(
-        'Replace an existing artifact with a new version. The share link stays the same. Pass the new full HTML or Markdown source in content, not a local file path. In chat or a temporary sandbox, keep the source inline. When no explicit route was chosen, use the CLI for a coding agent with a user-controlled workspace, CLI package access, and Artifact Share network access: `npx --yes @artifactshare/cli update <share-url> <path>`. MCP OAuth is separate from CLI auth; if the CLI reports `auth_required`, follow its recovery to set up or reuse a profile. If you do not know the id, call list_artifacts first.',
+        'Replace an existing artifact with a new version. The share link stays the same. Pass the new full HTML or Markdown source in content, not a local file path. In chat or a temporary sandbox, keep the source inline. When no explicit route was chosen, use the CLI for a coding agent with a user-controlled workspace, CLI package access, and Icon Share network access: `npx --yes @artifactshare/cli update <share-url> <path>`. MCP OAuth is separate from CLI auth; if the CLI reports `auth_required`, follow its recovery to set up or reuse a profile. If you do not know the id, call list_artifacts first.',
       ),
       outputSchema: UPDATE_OUTPUT_SCHEMA,
       annotations: PUBLIC_WRITE_ANNOTATIONS,
@@ -777,7 +777,7 @@ export function registerArtifactTools(
     {
       title: 'Append to artifact',
       description: toolDescription(
-        'Append content exactly as provided to an existing single-file artifact. Use inline source in chat or a temporary sandbox; when no explicit route was chosen, use the CLI for a coding agent with a user-controlled workspace, CLI package access, and Artifact Share network access: `npx --yes @artifactshare/cli append <share-url> <path>`. MCP OAuth is separate from CLI auth; follow the CLI `auth_required` recovery to set up or reuse a profile. No newline or separator is inserted. For Markdown, add it to the end of the current source with no separator. For HTML, insert it immediately before an ASCII case-insensitive </body> closing tag; if none exists, add it at the end. A new version is created at the same share URL. Retry the same append_artifact call after version_conflict to append to the latest version without overwriting the earlier update. After a transport error, call get_artifact before retrying because the append may have committed. Inspect the source end for Markdown; for HTML, inspect immediately before the selected closing body tag, or the source end when that tag is absent. Static sites are not supported.',
+        'Append content exactly as provided to an existing single-file artifact. Use inline source in chat or a temporary sandbox; when no explicit route was chosen, use the CLI for a coding agent with a user-controlled workspace, CLI package access, and Icon Share network access: `npx --yes @artifactshare/cli append <share-url> <path>`. MCP OAuth is separate from CLI auth; follow the CLI `auth_required` recovery to set up or reuse a profile. No newline or separator is inserted. For Markdown, add it to the end of the current source with no separator. For HTML, insert it immediately before an ASCII case-insensitive </body> closing tag; if none exists, add it at the end. A new version is created at the same share URL. Retry the same append_artifact call after version_conflict to append to the latest version without overwriting the earlier update. After a transport error, call get_artifact before retrying because the append may have committed. Inspect the source end for Markdown; for HTML, inspect immediately before the selected closing body tag, or the source end when that tag is absent. Static sites are not supported.',
       ),
       outputSchema: UPDATE_OUTPUT_SCHEMA,
       annotations: PUBLIC_WRITE_ANNOTATIONS,
@@ -988,7 +988,7 @@ export function registerArtifactTools(
     {
       title: 'Preview artifact',
       description: toolDescription(
-        'Show a compact card for an artifact you can view — your own, or one shared with you in your workspace — with an action to open the full artifact in Artifact Share. Use it when the user wants to inspect or open a shared artifact. If you do not know the id, call list_artifacts first.',
+        'Show a compact card for an artifact you can view — your own, or one shared with you in your workspace — with an action to open the full artifact in Icon Share. Use it when the user wants to inspect or open a shared artifact. If you do not know the id, call list_artifacts first.',
       ),
       outputSchema: PREVIEW_OUTPUT_SCHEMA,
       annotations: READ_ONLY_ANNOTATIONS,
@@ -2231,14 +2231,14 @@ function permissionError(
         message:
           'This account can view and comment, but cannot publish its own files.',
         recoverable_by: 'human',
-        hint: 'Sign in with Google or Microsoft on the Artifact Share website to create an upload-enabled workspace.',
+        hint: 'Sign in with Google or Microsoft on the Icon Share website to create an upload-enabled workspace.',
       })
     case 'not-allowed':
       return toolError({
         code: 'upload-not-enabled',
         message: 'Publishing is paused right now.',
         recoverable_by: 'human',
-        hint: 'Artifact Share has paused publishing; contact Artifact Share support if you need it enabled.',
+        hint: 'Icon Share has paused publishing; contact Icon Share support if you need it enabled.',
       })
     case 'missing-flagship-binding':
       return toolError({
@@ -2335,9 +2335,9 @@ async function uploadError(
       return toolError({
         code: 'contributor-limit',
         message:
-          'This workspace cannot add more contributors. Contact the Artifact Share team.',
+          'This workspace cannot add more contributors. Contact the Icon Share team.',
         recoverable_by: 'human',
-        hint: 'Contact the Artifact Share team for help.',
+        hint: 'Contact the Icon Share team for help.',
       })
     case 'quota-exceeded':
       const destination = containerId

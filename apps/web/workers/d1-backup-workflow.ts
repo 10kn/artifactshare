@@ -146,7 +146,7 @@ async function notifyD1BackupFailure(
     ? new Date(event.schedule.scheduledTime).toISOString()
     : event.timestamp.toISOString()
   const text = [
-    '*Artifact Share D1 backup workflow failed*',
+    '*Icon Share D1 backup workflow failed*',
     'Cloudflare Workflow failed before saving the scheduled D1 export.',
     `• workflow: ${slackEscape(event.workflowName)}`,
     `• scheduled: ${scheduledTime}`,
@@ -158,7 +158,7 @@ async function notifyD1BackupFailure(
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        text: 'Artifact Share D1 backup workflow failed',
+        text: 'Icon Share D1 backup workflow failed',
         blocks: [
           {
             type: 'section',

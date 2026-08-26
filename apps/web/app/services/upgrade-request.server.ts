@@ -40,8 +40,8 @@ type BuildUpgradeRequestInput = {
 }
 
 const SUPPORT_SUBJECTS: Record<UpgradeLimitType, string> = {
-  storage: 'Artifact Share upgrade help: storage',
-  projects: 'Artifact Share upgrade help: projects',
+  storage: 'Icon Share upgrade help: storage',
+  projects: 'Icon Share upgrade help: projects',
 }
 
 function recommendation(

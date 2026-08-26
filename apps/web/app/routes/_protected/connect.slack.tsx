@@ -24,5 +24,5 @@ export async function loader({
     user.id,
   )
 
-  return new Response('Connected Artifact Share to Slack.')
+  return new Response('Connected Icon Share to Slack.')
 }

@@ -868,16 +868,16 @@ describe('/a/:id loader', () => {
       },
     } as never)
     const description =
-      'This Artifact Share file requires sign-in with an allowed account. AI assistants cannot read the file contents from this unauthenticated page. Shell-capable agents can try npx --yes @artifactshare/cli open https://artifactshare.com/a/html123abc.'
+      'This Icon Share file requires sign-in with an allowed account. AI assistants cannot read the file contents from this unauthenticated page. Shell-capable agents can try npx --yes @artifactshare/cli open https://artifactshare.com/a/html123abc.'
 
     expect(tags).toContainEqual({
       property: 'og:title',
-      content: 'Artifact Share',
+      content: 'Icon Share',
     })
     expect(tags).toContainEqual({ name: 'description', content: description })
     expect(tags).toContainEqual({
       property: 'og:description',
-      content: 'Shared via Artifact Share',
+      content: 'Shared via Icon Share',
     })
     expect(JSON.stringify(tags)).not.toContain('Demo Report')
     expect(JSON.stringify(tags)).not.toContain('demo.html')

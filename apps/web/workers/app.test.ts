@@ -467,7 +467,7 @@ describe('app worker maintenance mode', () => {
     await expect(response.json()).resolves.toEqual({
       error: {
         code: 'maintenance',
-        message: 'Artifact Share is currently under maintenance.',
+        message: 'Icon Share is currently under maintenance.',
       },
     })
   })
@@ -487,7 +487,7 @@ describe('app worker maintenance mode', () => {
       id: null,
       error: {
         code: -32000,
-        message: 'Artifact Share is currently under maintenance.',
+        message: 'Icon Share is currently under maintenance.',
         data: {
           code: 'maintenance',
           retry_after_seconds: 300,
@@ -656,7 +656,7 @@ describe('app worker maintenance mode', () => {
     await expect(response.json()).resolves.toEqual({
       error: {
         code: 'maintenance',
-        message: 'Artifact Share is currently under maintenance.',
+        message: 'Icon Share is currently under maintenance.',
       },
     })
   })
@@ -802,7 +802,7 @@ describe('app worker maintenance mode', () => {
     await expect(response.json()).resolves.toEqual({
       error: {
         code: 'maintenance',
-        message: 'Artifact Share is currently under maintenance.',
+        message: 'Icon Share is currently under maintenance.',
       },
     })
   })

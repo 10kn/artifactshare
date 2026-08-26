@@ -70,7 +70,7 @@ describe('agentSurface', () => {
     })
   })
 
-  test('advertises apex Artifact Share URL routing and intent boundaries', () => {
+  test('advertises apex Icon Share URL routing and intent boundaries', () => {
     expect(agentSurface.url_patterns).toEqual([
       'https://artifactshare.com/a/...',
     ])
@@ -101,7 +101,7 @@ describe('agentSurface', () => {
     )
     expect(capabilitiesMd).toContain('link_sharing_plan_required')
     expect(llmsTxt).toContain('as で共有して')
-    expect(llmsTxt).toMatch(/Do not treat bare "artifact" as Artifact Share/)
+    expect(llmsTxt).toMatch(/Do not treat bare "artifact" as Icon Share/)
   })
 
   test('advertises CLI as the shell-available path', () => {

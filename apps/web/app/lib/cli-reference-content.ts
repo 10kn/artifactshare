@@ -67,7 +67,7 @@ const roleByPath: Record<string, string> = {
   login: 'Authorize the CLI with unrestricted or project-scoped agent access.',
   logout: 'Revoke and remove a saved credential.',
   move: 'Move an artifact to a project or home.',
-  open: 'Read an Artifact Share URL and prepare the CLI skill when needed.',
+  open: 'Read an Icon Share URL and prepare the CLI skill when needed.',
   profiles: 'Manage named authentication profiles.',
   'profiles delete': 'Delete a named profile.',
   'profiles import-token':
@@ -78,9 +78,9 @@ const roleByPath: Record<string, string> = {
   'projects create': 'Create a project.',
   'projects edit': 'Edit project details, audience, or archive state.',
   'projects list': 'List projects available to you.',
-  resolve: 'Resolve a URL, ID, or other Artifact Share value.',
+  resolve: 'Resolve a URL, ID, or other Icon Share value.',
   share: 'Share a local file, folder, or static site.',
-  skills: 'Manage the installed Artifact Share agent skill.',
+  skills: 'Manage the installed Icon Share agent skill.',
   'skills ensure': 'Ensure the skill is installed for a detected tool.',
   'skills install': 'Install the skill for a selected tool.',
   'skills list': 'List installed skill targets.',
@@ -164,7 +164,7 @@ const jaRoleByPath: Record<string, string> = {
     '通常権限または1プロジェクトに制限した agent 権限で CLI を認証します。',
   logout: '保存済みの認証情報を失効して削除します。',
   move: '成果物を project または home へ移動します。',
-  open: 'Artifact Share URL を読み取り、必要なら CLI skill を準備します。',
+  open: 'Icon Share URL を読み取り、必要なら CLI skill を準備します。',
   profiles: '名前付きの認証 profile を管理します。',
   'profiles delete': '名前付き profile を削除します。',
   'profiles import-token':
@@ -175,9 +175,9 @@ const jaRoleByPath: Record<string, string> = {
   'projects create': 'project を作成します。',
   'projects edit': 'project の詳細、audience、アーカイブ状態を編集します。',
   'projects list': '利用できる project を一覧表示します。',
-  resolve: 'URL、ID、その他の Artifact Share の値を解決します。',
+  resolve: 'URL、ID、その他の Icon Share の値を解決します。',
   share: 'ローカルのファイル、フォルダ、静的サイトを共有します。',
-  skills: 'インストール済みの Artifact Share agent skill を管理します。',
+  skills: 'インストール済みの Icon Share agent skill を管理します。',
   'skills ensure': '検出した tool に skill があることを確認します。',
   'skills install': '選択した tool に skill をインストールします。',
   'skills list': 'skill がインストールされた tool を一覧表示します。',
@@ -189,7 +189,7 @@ const jaRoleByPath: Record<string, string> = {
 
 const EN: CliReferenceContent = {
   locale: 'en',
-  title: 'Artifact Share CLI reference',
+  title: 'Icon Share CLI reference',
   intro:
     'A public, machine-friendly guide to sharing, updating, reading, and organizing artifacts from a terminal.',
   tocTitle: 'On this page',
@@ -216,7 +216,7 @@ const EN: CliReferenceContent = {
     },
     recovery: {
       title: 'Failures and recovery',
-      body: 'For auth_required or token_invalid, run login or import a valid profile token and rerun the same command. For validation_failed, check usage and options. For target_not_found, resolve the URL or ID again. For upload_not_allowed, contact Artifact Share support. For network_failed, check the base URL and retry without changing the destination.',
+      body: 'For auth_required or token_invalid, run login or import a valid profile token and rerun the same command. For validation_failed, check usage and options. For target_not_found, resolve the URL or ID again. For upload_not_allowed, contact Icon Share support. For network_failed, check the base URL and retry without changing the destination.',
     },
     related: {
       title: 'Related guides',
@@ -244,16 +244,16 @@ const EN: CliReferenceContent = {
     },
   },
   og: {
-    title: 'Artifact Share CLI reference',
+    title: 'Icon Share CLI reference',
     description:
-      'A public reference for the Artifact Share CLI, including every public command, JSON output, settings, destinations, and recovery.',
+      'A public reference for the Icon Share CLI, including every public command, JSON output, settings, destinations, and recovery.',
   },
 }
 
 const JA: CliReferenceContent = {
   ...EN,
   locale: 'ja',
-  title: 'Artifact Share CLI リファレンス',
+  title: 'Icon Share CLI リファレンス',
   intro:
     'ターミナルからファイルを共有、更新、読み取り、整理するための公開リファレンスです。',
   tocTitle: 'このページの内容',
@@ -280,11 +280,11 @@ const JA: CliReferenceContent = {
     },
     recovery: {
       title: '失敗と復旧',
-      body: 'auth_required または token_invalid なら login か有効な profile token の import を行い、同じ command を再実行します。validation_failed は構文と option を確認します。target_not_found は URL または ID を解決し直します。upload_not_allowed は Artifact Share 運営へ問い合わせます。network_failed は base URL を確認して、投稿先を変えずに再試行します。',
+      body: 'auth_required または token_invalid なら login か有効な profile token の import を行い、同じ command を再実行します。validation_failed は構文と option を確認します。target_not_found は URL または ID を解決し直します。upload_not_allowed は Icon Share 運営へ問い合わせます。network_failed は base URL を確認して、投稿先を変えずに再試行します。',
     },
     related: {
       title: '関連ガイド',
-      body: '接続方法は connect ガイド、agent への頼み方は AI から Artifact Share を使うガイド、変更情報は updates、導入の詳細は npm package ページを参照してください。',
+      body: '接続方法は connect ガイド、agent への頼み方は AI から Icon Share を使うガイド、変更情報は updates、導入の詳細は npm package ページを参照してください。',
     },
   },
   commandsHeading: '公開 command 一覧',
@@ -304,7 +304,7 @@ const JA: CliReferenceContent = {
   links: {
     shareWithAi: {
       href: '/share-with-ai',
-      label: 'AI から Artifact Share を使う',
+      label: 'AI から Icon Share を使う',
     },
     connect: { href: '/connect', label: '接続ガイド' },
     updates: { href: '/updates', label: '更新情報' },
@@ -318,7 +318,7 @@ const JA: CliReferenceContent = {
     },
   },
   og: {
-    title: 'Artifact Share CLI リファレンス',
+    title: 'Icon Share CLI リファレンス',
     description:
       '公開 CLI の全 command、JSON 出力、設定、投稿先、復旧方法をまとめたリファレンスです。',
   },

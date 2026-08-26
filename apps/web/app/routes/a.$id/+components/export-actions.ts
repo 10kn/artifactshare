@@ -540,7 +540,7 @@ video {
   const mark = doc.createElement('span')
   mark.className = 'asx-print-mark'
   const brandName = doc.createElement('span')
-  brandName.textContent = 'Artifact Share'
+  brandName.textContent = 'Icon Share'
   brand.appendChild(mark)
   brand.appendChild(brandName)
 

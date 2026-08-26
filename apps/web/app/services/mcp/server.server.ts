@@ -8,7 +8,7 @@ import { registerArtifactTools } from './tools.server'
 const MCP_SERVER_INFO = {
   name: 'artifactshare',
   version: '0.1.0',
-  title: 'Artifact Share',
+  title: 'Icon Share',
 } as const
 
 /**

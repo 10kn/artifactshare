@@ -617,7 +617,7 @@ describe('headless publish wiring', () => {
     expect(await loadMcpUser(db, 'nobody')).toBeNull()
   })
 
-  test('tools list advertises "as" as a short Artifact Share name', async () => {
+  test('tools list advertises "as" as a short Icon Share name', async () => {
     const body = await callMcp(db, 'tools/list')
     const tools = body.result?.tools as Array<{
       name?: string
@@ -628,7 +628,7 @@ describe('headless publish wiring', () => {
     expect(tools.every((tool) => tool.description?.includes('"as"'))).toBe(true)
     expect(
       tools.every((tool) =>
-        tool.description?.includes('If the user says "Artifact Share"'),
+        tool.description?.includes('If the user says "Icon Share"'),
       ),
     ).toBe(true)
   })

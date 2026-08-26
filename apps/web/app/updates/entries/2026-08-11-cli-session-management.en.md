@@ -5,7 +5,7 @@ products: [web, cli, admin]
 kind: improve
 ---
 
-Settings → Tokens now lists active Artifact Share CLI login sessions. You can revoke one session or revoke them all at once.
+Settings → Tokens now lists active Icon Share CLI login sessions. You can revoke one session or revoke them all at once.
 
 <!-- more -->
 

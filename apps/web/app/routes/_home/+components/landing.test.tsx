@@ -17,11 +17,11 @@ vi.mock('~/hooks/use-t', () => ({
           'Turn HTML and Markdown made with AI into links that open in a browser.',
         'lp.subShare':
           'Share it only within your company or with project members.',
-        'lp.scrollToFlow': 'What you can do with Artifact Share',
+        'lp.scrollToFlow': 'What you can do with Icon Share',
         'lp.invite.title': 'Sign in to view this file',
         'lp.invite.sub': 'Someone shared a file with you.',
         'lp.cta': 'Continue with Google',
-        'lp.maintenanceAuth': 'Artifact Share is under maintenance.',
+        'lp.maintenanceAuth': 'Icon Share is under maintenance.',
         'lp.ai.summary': 'Use it with AI',
         'lp.ai.intro': 'Markdown, folders, and static sites work too.',
         'lp.routes.mcp.badge': 'MCP',
@@ -34,7 +34,7 @@ vi.mock('~/hooks/use-t', () => ({
         'lp.flow.title':
           'One flow from publishing work made with AI to updating it at the same URL.',
         'lp.flow.body':
-          'With Artifact Share, decide who can view a file when you publish it, collect comments at the relevant places on the shared page, and update the next version at the same URL.',
+          'With Icon Share, decide who can view a file when you publish it, collect comments at the relevant places on the shared page, and update the next version at the same URL.',
         'lp.flow.steps.publish.title': 'Publish and choose who can view',
         'lp.flow.steps.publish.body':
           'Publish HTML, Markdown, a folder, or a static site from AI or your browser to create a link that opens in a browser. Choose who can view it based on who you want to share it with.',
@@ -75,7 +75,7 @@ vi.mock('~/hooks/use-t', () => ({
         'lp.access.startMethods':
           'Use it from the browser, CLI, or MCP.',
         'lp.access.pricingCta': 'Compare plans',
-        'footer.about': 'About Artifact Share',
+        'footer.about': 'About Icon Share',
         'footer.operatedBy': 'Operated by',
         'footer.operatorName': 'TechTalk, Inc.',
         'lp.connect.mcpLink': 'MCP guide',
@@ -146,13 +146,13 @@ describe('Landing', () => {
     expect(html).toContain('href="/share-with-ai"')
     expect(html).toContain('href="/connect"')
     expect(html).toContain('Icon Share')
-    expect(html).not.toContain('>Artifact Share<')
+    expect(html).not.toContain('>Icon Share<')
     expect(html).not.toContain('href="/pricing"')
     expect(html).not.toContain('Sign in with email')
     expect(html).toContain(
       'Turn HTML and Markdown made with AI into links that open in a browser.',
     )
-    expect(html).toContain('What you can do with Artifact Share')
+    expect(html).toContain('What you can do with Icon Share')
     expect(html).toContain('href="#landing-flow"')
     expect(html).toContain('id="landing-flow"')
     expect(html).toContain(
@@ -185,11 +185,11 @@ describe('Landing', () => {
     ).toHaveLength(3)
     expect(html).not.toContain('Carry meeting notes into later work.')
     expect(html).toContain('data-slot="public-footer" data-variant="full"')
-    expect(html).toContain('About Artifact Share')
+    expect(html).toContain('About Icon Share')
     expect(html).toContain('Operated by')
     expect(html).toContain('TechTalk, Inc.')
     expect(html).toContain('href="https://www.techtalk.jp"')
-    expect(html).not.toContain('Official information about Artifact Share')
+    expect(html).not.toContain('Official information about Icon Share')
     expect(html).toContain('pb-24')
     expect(html).not.toContain('href="/use-cases/')
   })
@@ -223,7 +223,7 @@ describe('Landing', () => {
     expect(html).not.toContain('research-review.webp')
     expect(html).not.toContain('flow-publish-share.webp')
     expect(html).not.toContain('#landing-flow')
-    expect(html).not.toContain('What you can do with Artifact Share')
+    expect(html).not.toContain('What you can do with Icon Share')
     expect(html).toContain('data-slot="public-footer" data-variant="minimal"')
     expect(html).not.toContain('pb-24')
   })
@@ -233,7 +233,7 @@ describe('Landing', () => {
     rootData.maintenance = true
     const html = renderLanding()
 
-    expect(html).toContain('Artifact Share is under maintenance.')
+    expect(html).toContain('Icon Share is under maintenance.')
     expect(html).toContain('disabled=""')
   })
 })

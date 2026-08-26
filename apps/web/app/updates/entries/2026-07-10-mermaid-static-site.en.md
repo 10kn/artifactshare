@@ -5,7 +5,7 @@ products: [web, cli]
 kind: new
 ---
 
-Upload a folder that contains HTML with Mermaid code blocks and Artifact Share renders the diagrams in the shared site view.
+Upload a folder that contains HTML with Mermaid code blocks and Icon Share renders the diagrams in the shared site view.
 
 <!-- more -->
 

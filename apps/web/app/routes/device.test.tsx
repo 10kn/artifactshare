@@ -43,7 +43,7 @@ vi.mock('~/components/app/consent-panel', () => ({
   ),
 }))
 vi.mock('~/components/app/focused-flow-brand', () => ({
-  FocusedFlowBrand: () => <a href="/">Artifact Share</a>,
+  FocusedFlowBrand: () => <a href="/">Icon Share</a>,
 }))
 vi.mock('~/components/app/landing-shell', () => ({
   LandingHero: ({ children }: { children: ReactNode }) => (

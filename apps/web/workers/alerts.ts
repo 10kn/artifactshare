@@ -64,7 +64,7 @@ async function alertFromTrace(
   if (scheduled && item.outcome !== 'ok') {
     return {
       key: `cron:${safeScriptName(item)}:${scheduled.cron}`,
-      title: 'Artifact Share cron failed',
+      title: 'Icon Share cron failed',
       summary: 'Scheduled Worker invocation finished with a failed outcome.',
       fields: [
         `worker: ${safeScriptName(item)}`,
@@ -88,7 +88,7 @@ async function alertFromTrace(
 
     return {
       key: `exception:${safeScriptName(item)}:${item.outcome}`,
-      title: 'Artifact Share uncaught exception',
+      title: 'Icon Share uncaught exception',
       summary: 'Worker invocation recorded an exception.',
       fields: exceptionFields,
       cooldownSeconds: immediateCooldownSeconds,
@@ -101,7 +101,7 @@ async function alertFromTrace(
   if (sandboxReport)
     return {
       key: `sandbox-block:${sandboxReport.artifactId}:${sandboxReport.failureType}`,
-      title: 'Artifact Share sandbox blocked',
+      title: 'Icon Share sandbox blocked',
       summary: 'A browser confirmed that sandbox delivery was blocked.',
       fields: [
         `artifact: ${escapeSlackText(sandboxReport.artifactId)}`,
@@ -118,7 +118,7 @@ async function alertFromTrace(
   if (authHang) {
     return {
       key: `auth-hang:${authHang.recovered}`,
-      title: 'Artifact Share auth hang recovery',
+      title: 'Icon Share auth hang recovery',
       summary: 'getSession hung and the auth instance was rebuilt.',
       fields: [
         `worker: ${safeScriptName(item)}`,
@@ -132,7 +132,7 @@ async function alertFromTrace(
     if (!fetchInfo || item.outcome === 'ok') return null
     return {
       key: `fetch-outcome:${safeScriptName(item)}:${item.outcome}`,
-      title: 'Artifact Share request failed',
+      title: 'Icon Share request failed',
       summary: 'Fetch Worker invocation finished with a failed outcome.',
       fields: [
         `worker: ${safeScriptName(item)}`,
@@ -148,7 +148,7 @@ async function alertFromTrace(
 
   return {
     key: `5xx:${safeScriptName(item)}`,
-    title: 'Artifact Share 5xx burst',
+    title: 'Icon Share 5xx burst',
     summary: `HTTP 5xx reached ${count} events in ${fiveXxWindowSeconds / 60} minutes.`,
     fields: [
       `worker: ${safeScriptName(item)}`,
