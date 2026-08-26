@@ -1969,6 +1969,9 @@ export function assertSignInAllowlist(
       emailsRaw: env.AUTH_ALLOWLIST_EMAILS,
     })
   ) {
+    console.warn('sign-in-not-allowed', {
+      domain: normalizeEmailDomain(email) ?? '',
+    })
     throw signInNotAllowedError()
   }
 }

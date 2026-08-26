@@ -971,6 +971,7 @@
   "signin.error.admin_consent": "あなたの組織では、管理者がこのアプリを承認する必要があります。組織の IT 管理者に、Artifact Share の利用承認を依頼してください。",
   "signin.error.account_not_linked": "このメールアドレスは登録済みです。下の欄にメールアドレスを入れて、コードでログインしてください。",
   "signin.error.generic": "ログインに失敗しました。もう一度お試しください。",
+  "signin.error.not_allowed": "この Google アカウントではログインできません。許可されたアカウントでお試しください。",
   "signin.email.toggle": "メールアドレスでログイン",
   "signin.email.expand": "メールアドレスを使う",
   "signin.email.collapse": "Google または Microsoft に戻る",
