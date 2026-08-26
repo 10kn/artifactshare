@@ -16,18 +16,28 @@ vi.mock('~/hooks/use-t', () => ({
         'lp.pricing': 'Pricing',
         'footer.connect': 'Connect',
         'footer.shareWithAi': 'Share with AI',
-        'footer.about': 'About Artifact Share',
+        'footer.about': 'About Icon Share',
         'footer.operatedBy': 'Operated by',
         'footer.operatorName': 'TechTalk, Inc.',
+        'footer.upstreamAttribution': 'Based on __UPSTREAM__ (source-available)',
         'updates.pageTitle': 'Updates',
-        'lp.invite.about': 'About Artifact Share',
+        'lp.invite.about': 'Share files made with AI, just within your company',
         'footer.colProduct': 'Product',
         'footer.colLegal': 'Legal',
+        'analyticsConsent.change': 'Analytics settings',
+        'vw.homeLink': 'Icon Share home',
+        'menu.appTheme': 'Theme',
+        'menu.appThemeSystem': 'System',
+        'menu.appThemeLight': 'Light',
+        'menu.appThemeDark': 'Dark',
       })[key] ?? key,
   }),
 }))
 
 vi.mock('~/components/app/brand-mark', () => ({ BrandMark: () => <span /> }))
+vi.mock('~/components/app/analytics-consent-provider', () => ({
+  useAnalyticsConsent: () => ({ openBanner: vi.fn() }),
+}))
 
 vi.mock('react-router', async (importOriginal) => {
   const actual = await importOriginal<typeof import('react-router')>()
@@ -40,9 +50,9 @@ vi.mock('react-router', async (importOriginal) => {
 
 describe('PublicFooter', () => {
   test.each([
-    ['en', '/privacy'],
-    ['ja', '/ja/privacy'],
-  ] as const)('renders complete locale links for %s', (locale, privacyHref) => {
+    ['en', '/about'],
+    ['ja', '/ja/about'],
+  ] as const)('hides SaaS legal chrome and keeps attribution for %s', (locale, aboutHref) => {
     mockedLocale = locale
     const html = renderToStaticMarkup(
       <MemoryRouter>
@@ -50,34 +60,27 @@ describe('PublicFooter', () => {
       </MemoryRouter>,
     )
     expect(html).toContain('data-slot="public-footer" data-variant="full"')
-    expect(html).toContain(`href="${privacyHref}"`)
-    for (const href of [
-      '/connect',
-      '/share-with-ai',
-      '/updates',
-      '/terms',
-      '/tokushoho',
-    ]) {
-      expect(html).toContain(`href="${locale === 'ja' ? `/ja${href}` : href}"`)
-    }
+    expect(html).not.toContain('href="/privacy"')
+    expect(html).not.toContain('href="/ja/privacy"')
+    expect(html).not.toContain('href="/terms"')
+    expect(html).not.toContain('href="/tokushoho"')
+    expect(html).not.toContain('Analytics settings')
+    expect(html).not.toContain('Operated by')
+    expect(html).not.toContain('TechTalk, Inc.')
     expect(html).not.toContain('href="/pricing"')
-    expect(html).not.toContain('href="/ja/pricing"')
+    expect(html).toContain(`href="${aboutHref}"`)
+    expect(html).toContain('About Icon Share')
+    expect(html).toContain('Based on ')
+    expect(html).toContain('>Artifact Share</a>')
+    expect(html).toContain('(source-available)')
     expect(html).toContain(`© ${new Date().getFullYear()} Icon Share`)
-    expect(html).toContain(`href="${locale === 'ja' ? '/ja/about' : '/about'}"`)
-    expect(html).toContain('About Artifact Share')
-    expect(html).toContain('Operated by')
-    expect(html).toContain('TechTalk, Inc.')
-    expect(html).toContain('href="https://www.techtalk.jp"')
     expect(html).toContain(
       'href="https://github.com/artifactshare/artifactshare"',
     )
-    expect(html).toContain('tabler-icon-brand-github')
-    expect(html).toContain('target="_blank"')
-    expect(html).toContain('rel="noreferrer"')
     expect(html).toMatch(/<a[^>]*aria-label="[^"]*"[^>]*href="\/"/)
   })
 
-  test('minimal renders only legal links and copyright', () => {
+  test('minimal keeps attribution and copyright without legal links', () => {
     mockedLocale = 'en'
     const html = renderToStaticMarkup(
       <MemoryRouter>
@@ -87,12 +90,11 @@ describe('PublicFooter', () => {
     expect(html).toContain('data-slot="public-footer" data-variant="minimal"')
     expect(html).not.toContain('href="/connect"')
     expect(html).not.toContain('href="/about"')
-    expect(html).not.toContain(
-      'href="https://github.com/artifactshare/artifactshare"',
-    )
-    expect(html).not.toContain('Operated by TechTalk, Inc.')
-    for (const href of ['/privacy', '/terms', '/tokushoho'])
-      expect(html).toContain(`href="${href}"`)
+    expect(html).not.toContain('href="/privacy"')
+    expect(html).not.toContain('href="/terms"')
+    expect(html).not.toContain('href="/tokushoho"')
+    expect(html).not.toContain('Analytics settings')
+    expect(html).toContain('>Artifact Share</a>')
     expect(html).toContain(`© ${new Date().getFullYear()} Icon Share`)
     expect(html).not.toContain('aria-label="Language"')
     expect(html).not.toContain('href="/ja"')

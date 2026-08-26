@@ -21,7 +21,13 @@ import { LOCALE_LABEL, SUPPORTED_LOCALES, type Locale } from '~/i18n/messages'
 import { DEFAULT_APP_THEME, isAppTheme, type AppTheme } from '~/lib/app-theme'
 import { withLang } from '~/lib/connect-link'
 import { isPublicPagePath } from '~/lib/guide-locale'
-import { HIDE_PRICING_NAV, PRODUCT_DISPLAY_NAME } from '~/lib/instance-policy'
+import {
+  HIDE_PRICING_NAV,
+  HIDE_PUBLIC_LEGAL_NAV,
+  PRODUCT_DISPLAY_NAME,
+  UPSTREAM_PRODUCT_NAME,
+  UPSTREAM_PRODUCT_REPO_URL,
+} from '~/lib/instance-policy'
 import { cn } from '~/lib/utils'
 
 export function PublicFooter({
@@ -42,11 +48,13 @@ export function PublicFooter({
     : isAppTheme(rootData?.appTheme)
       ? rootData.appTheme
       : DEFAULT_APP_THEME
-  const legal = [
-    ['/privacy', t('lp.privacy')],
-    ['/terms', t('lp.terms')],
-    ['/tokushoho', t('lp.tokushoho')],
-  ] as const
+  const legal = HIDE_PUBLIC_LEGAL_NAV
+    ? ([] as const)
+    : ([
+        ['/privacy', t('lp.privacy')],
+        ['/terms', t('lp.terms')],
+        ['/tokushoho', t('lp.tokushoho')],
+      ] as const)
   const product = (
     [
       ['/about', t('footer.about')],
@@ -85,6 +93,29 @@ export function PublicFooter({
   ] as const
   const ThemeIcon =
     themeOptions.find(([theme]) => theme === appTheme)?.[2] ?? Monitor
+  const upstreamAttribution = (
+    <p className="text-muted-foreground m-0 text-xs">
+      {t('footer.upstreamAttribution')
+        .split('__UPSTREAM__')
+        .map((part, index) =>
+          index === 0 ? (
+            <Fragment key={index}>{part}</Fragment>
+          ) : (
+            <Fragment key={index}>
+              <a
+                className={linkClass}
+                href={UPSTREAM_PRODUCT_REPO_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {UPSTREAM_PRODUCT_NAME}
+              </a>
+              {part}
+            </Fragment>
+          ),
+        )}
+    </p>
+  )
   return (
     <footer
       data-slot="public-footer"
@@ -108,24 +139,27 @@ export function PublicFooter({
             <p className="max-w-landing-sub-max text-muted-foreground m-0 text-xs">
               {t('lp.invite.about')}
             </p>
-            <p className="text-muted-foreground m-0 text-xs">
-              {t('footer.operatedBy')}{' '}
-              <a
-                className={linkClass}
-                href="https://www.techtalk.jp"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t('footer.operatorName')}
-              </a>
-            </p>
+            {HIDE_PUBLIC_LEGAL_NAV ? null : (
+              <p className="text-muted-foreground m-0 text-xs">
+                {t('footer.operatedBy')}{' '}
+                <a
+                  className={linkClass}
+                  href="https://www.techtalk.jp"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t('footer.operatorName')}
+                </a>
+              </p>
+            )}
+            {upstreamAttribution}
           </div>
           <div className="flex flex-col gap-2">
             <h2 className={columnHeadingClass}>{t('footer.colProduct')}</h2>
             {links(product)}
             <a
               className={cn(linkClass, 'flex items-center gap-1')}
-              href="https://github.com/artifactshare/artifactshare"
+              href={UPSTREAM_PRODUCT_REPO_URL}
               target="_blank"
               rel="noreferrer"
             >
@@ -133,17 +167,19 @@ export function PublicFooter({
               GitHub
             </a>
           </div>
-          <div className="flex flex-col gap-2">
-            <h2 className={columnHeadingClass}>{t('footer.colLegal')}</h2>
-            {links(legal)}
-            <button
-              type="button"
-              className={linkClass}
-              onClick={(event) => openBanner(event.currentTarget)}
-            >
-              {t('analyticsConsent.change')}
-            </button>
-          </div>
+          {HIDE_PUBLIC_LEGAL_NAV ? null : (
+            <div className="flex flex-col gap-2">
+              <h2 className={columnHeadingClass}>{t('footer.colLegal')}</h2>
+              {links(legal)}
+              <button
+                type="button"
+                className={linkClass}
+                onClick={(event) => openBanner(event.currentTarget)}
+              >
+                {t('analyticsConsent.change')}
+              </button>
+            </div>
+          )}
         </div>
       ) : null}
       <div
@@ -153,16 +189,20 @@ export function PublicFooter({
         )}
       >
         {variant === 'minimal' ? (
-          <>
-            {links(legal)}
-            <button
-              type="button"
-              className={linkClass}
-              onClick={(event) => openBanner(event.currentTarget)}
-            >
-              {t('analyticsConsent.change')}
-            </button>
-          </>
+          HIDE_PUBLIC_LEGAL_NAV ? (
+            upstreamAttribution
+          ) : (
+            <>
+              {links(legal)}
+              <button
+                type="button"
+                className={linkClass}
+                onClick={(event) => openBanner(event.currentTarget)}
+              >
+                {t('analyticsConsent.change')}
+              </button>
+            </>
+          )
         ) : null}
         <span suppressHydrationWarning>
           © {new Date().getFullYear()} {PRODUCT_DISPLAY_NAME}
